@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://de3pecwpkw22v"]
+
+[ext_resource type="Texture2D" uid="uid://dvmjklihbgts7" path="res://prototype/sprites/Cubicle.png" id="1_xj1em"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xj1em"]
+size = Vector2(59, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcm4j"]
+size = Vector2(6, 27.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0u36o"]
+size = Vector2(6, 27)
+
+[node name="Cubicle" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xj1em")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="DesktopCollision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, -14.5)
+shape = SubResource("RectangleShape2D_xj1em")
+
+[node name="LeftLegCollision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-26, 15.25)
+shape = SubResource("RectangleShape2D_hcm4j")
+
+[node name="RightLegCollision" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(26, 15)
+shape = SubResource("RectangleShape2D_0u36o")

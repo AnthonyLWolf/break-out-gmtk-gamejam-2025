@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://7m807y4v7w4p"]
+
+[ext_resource type="Script" uid="uid://ctlmxppc2n0lh" path="res://scripts/exit_trigger.gd" id="1_06tvy"]
+[ext_resource type="Texture2D" uid="uid://ckvrap02nqyew" path="res://prototype/sprites/Exit Sign.png" id="2_puot6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyhfs"]
+radius = 39.3192
+
+[node name="ExitTrigger" type="Area2D"]
+script = ExtResource("1_06tvy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jyhfs")
+
+[node name="ExitSign" type="Sprite2D" parent="."]
+position = Vector2(0.499997, 1.5)
+scale = Vector2(1.23437, 1.23437)
+texture = ExtResource("2_puot6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

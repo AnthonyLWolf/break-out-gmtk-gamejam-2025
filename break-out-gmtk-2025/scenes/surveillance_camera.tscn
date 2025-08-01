@@ -1,0 +1,116 @@
+[gd_scene load_steps=18 format=3 uid="uid://skqv1g1kawty"]
+
+[ext_resource type="Texture2D" uid="uid://bs13d574bktha" path="res://prototype/sprites/SurvCamera-Sheet.png" id="1_grwal"]
+[ext_resource type="Script" uid="uid://dg4poa0b3jlp5" path="res://scripts/surveillance_camera.gd" id="1_sdebu"]
+[ext_resource type="PackedScene" uid="uid://t0fybjec12dg" path="res://scenes/modules/surveillance_module.tscn" id="3_lv5jy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8427l"]
+atlas = ExtResource("1_grwal")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdebu"]
+atlas = ExtResource("1_grwal")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv5jy"]
+atlas = ExtResource("1_grwal")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0h7t"]
+atlas = ExtResource("1_grwal")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdga8"]
+atlas = ExtResource("1_grwal")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcs2a"]
+atlas = ExtResource("1_grwal")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_walrp"]
+atlas = ExtResource("1_grwal")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doe06"]
+atlas = ExtResource("1_grwal")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ru60"]
+atlas = ExtResource("1_grwal")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs2iv"]
+atlas = ExtResource("1_grwal")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjly7"]
+atlas = ExtResource("1_grwal")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp4tq"]
+atlas = ExtResource("1_grwal")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo0w3"]
+atlas = ExtResource("1_grwal")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hu6m6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8427l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdebu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv5jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0h7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdga8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wcs2a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_walrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doe06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ru60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs2iv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjly7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp4tq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo0w3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="SurveillanceCamera" type="Node2D"]
+script = ExtResource("1_sdebu")
+rotation_speed = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hu6m6")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.962853
+
+[node name="SurveillanceModule" parent="AnimatedSprite2D" instance=ExtResource("3_lv5jy")]

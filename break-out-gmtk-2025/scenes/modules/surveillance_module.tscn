@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://t0fybjec12dg"]
+
+[ext_resource type="Script" uid="uid://bm6fk1816r5ei" path="res://scripts/surveillance_module.gd" id="1_o2uqg"]
+[ext_resource type="Theme" uid="uid://w8pum2862f6w" path="res://assets/ui_theme.tres" id="2_ydaht"]
+[ext_resource type="FontFile" uid="uid://duf76fr7dcnpt" path="res://assets/Jersey10-Regular.ttf" id="3_iv8oi"]
+
+[sub_resource type="FontVariation" id="FontVariation_gdga8"]
+base_font = ExtResource("3_iv8oi")
+
+[node name="SurveillanceModule" type="Area2D"]
+script = ExtResource("1_o2uqg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 16, -96, 224, 96, 224)
+
+[node name="SpottedTimer" type="Timer" parent="."]
+
+[node name="TimerLabel" type="RichTextLabel" parent="."]
+offset_left = -48.0
+offset_top = -56.0
+offset_right = 128.0
+offset_bottom = 8.0
+theme = ExtResource("2_ydaht")
+theme_override_fonts/normal_font = SubResource("FontVariation_gdga8")
+text = "Time: "
