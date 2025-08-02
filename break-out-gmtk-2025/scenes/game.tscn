@@ -1,0 +1,168 @@
+[gd_scene load_steps=23 format=4 uid="uid://dvbj7kv70ktsx"]
+
+[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_dinhu"]
+[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="2_kvuet"]
+[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="3_trtic"]
+[ext_resource type="Texture2D" uid="uid://dvmjklihbgts7" path="res://prototype/sprites/Cubicle.png" id="4_ir15t"]
+[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_ca42v"]
+[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_rysoc"]
+[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://de3pecwpkw22v" path="res://scenes/cubicle.tscn" id="8_264po"]
+[ext_resource type="PackedScene" uid="uid://7m807y4v7w4p" path="res://scenes/exit_trigger.tscn" id="9_1kice"]
+[ext_resource type="PackedScene" uid="uid://skqv1g1kawty" path="res://scenes/surveillance_camera.tscn" id="10_5newe"]
+[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="11_37s47"]
+[ext_resource type="PackedScene" uid="uid://b3n4qxmdigls3" path="res://scenes/security_guard.tscn" id="12_bt5mj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
+texture = ExtResource("2_kvuet")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.33333, -32, 5.33334, -32, 10.6667, 0, -10.6667, 0)
+4:0/0 = 0
+4:0/0/z_index = 1
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.5, 0.5, 2.5, 0.5, 10.6667, 32, -13, 32)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -16, -11.5, -16, -4, 16, -28, 16)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(12.5, -15.5, 19.5, -15.5, 27.5, 16, 4, 16)
+
+[sub_resource type="TileSet" id="TileSet_jkv2x"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_a8y0u")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tipki"]
+texture = ExtResource("4_ir15t")
+texture_region_size = Vector2i(64, 64)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
+texture = ExtResource("2_kvuet")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_85g3d"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_tipki")
+sources/2 = SubResource("TileSetAtlasSource_trceg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(1990.46, 18.15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(40.6218, 1137.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
+size = Vector2(1943.07, 25.41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(74.9567, 1103.52)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("11_37s47")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_dinhu")
+
+[node name="CubiclesTiles" type="Node2D" parent="."]
+
+[node name="Coworkers" type="TileMapLayer" parent="CubiclesTiles"]
+tile_map_data = PackedByteArray("AAABAAwAAAADAAAAAAAEAAwAAAADAAAAAAAGAAwAAAADAAAAAAAHAAwAAAADAAAAAAABAAgAAAADAAAAAAACAAgAAAADAAAAAAAEAAQAAAADAAAAAAAHAAQAAAADAAAAAAAJAAQAAAADAAAAAAAGAAQAAAADAAAAAAACAAUAAAADAAAAAAANAAQAAAADAAAAAAAOAAQAAAADAAAAAAAQAAQAAAADAAAAAAASAAYAAAADAAAAAAAUAAYAAAADAAAAAAATAAsAAAADAAAAAAASAAsAAAADAAAAAAAPAAwAAAADAAAAAAAOAAwAAAADAAAAAAAUAA0AAAADAAAAAAAVAAkAAAADAAAAAAARAAIAAAADAAAAAAAFAAgAAAADAAAAAAAGAAgAAAADAAAAAAAHAAgAAAADAAAAAAAEAAgAAAADAAAAAAADAAoAAAADAAAAAAAXAAIAAAADAAAAAAACAAYAAAAEAAAAAAADAAYAAAAEAAAAAAABAAYAAAAEAAAAAAAFAAYAAAAEAAAAAAADAAIAAAAEAAAAAAAEAAIAAAAEAAAAAAAGAAIAAAAEAAAAAAASAAkAAAAEAAAAAAAVAAoAAAAEAAAAAAAQAAoAAAAGAAAAAAAQAAsAAAAGAAAAAAAQAAwAAAAGAAAAAAAQAA0AAAAGAAAAAAAOAAkAAAAGAAAAAAAOAAoAAAAGAAAAAAAOAAUAAAAGAAAAAAAOAAcAAAAGAAAAAAAMAAYAAAAFAAAAAAAMAAcAAAAGAAAAAAAMAAgAAAAFAAAAAAAJAAYAAAAFAAAAAAAJAAgAAAAFAAAAAAAKAAwAAAAGAAAAAAAKAA0AAAAGAAAAAAAIAAoAAAAGAAAAAAAIAAsAAAAGAAAAAAAIAAwAAAAGAAAAAAAGAAkAAAAGAAAAAAAGAAoAAAAGAAAAAAAEAAkAAAAGAAAAAAAEAAoAAAAGAAAAAAAMAAMAAAAFAAAAAAAMAAQAAAAFAAAAAAAJAAEAAAAGAAAAAAAMAAEAAAAGAAAAAAAOAAEAAAAGAAAAAAAOAAIAAAAGAAAAAAAUAAMAAAAGAAAAAAASAAIAAAAGAAAAAAAWAAcAAAAGAAAAAAAWAAkAAAAGAAAAAAAWAAoAAAAGAAAAAAAWAAwAAAAGAAAAAAAMAAoAAAAFAAAAAAAMAAwAAAAFAAAAAAAMAA0AAAAFAAAAAAAKAAcAAAAGAAAAAAAKAAoAAAAGAAAAAAAKAAkAAAAGAAAAAAAHAAYAAAAGAAAAAAAGAA0AAAAFAAAAAAABAA0AAAAGAAAAAAAUAAcAAAAFAAAAAAAUAAgAAAAFAAAAAAAUAAkAAAAFAAAAAAAWAAIAAAAFAAAAAAAWAAMAAAAFAAAAAAAWAAUAAAAFAAAAAAACAAIAAAAFAAAAAAACAAMAAAAFAAAAAAADAAEAAAAFAAAAAAAIAAEAAAAFAAAAAAAYAAkAAAAFAAAAAAAYAAoAAAAFAAAAAAAYAAsAAAAFAAAAAAAYAAwAAAAFAAAAAAA=")
+tile_set = SubResource("TileSet_jkv2x")
+
+[node name="Cubicles" type="TileMapLayer" parent="CubiclesTiles"]
+material = ExtResource("3_trtic")
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAATAAAAAQAAAAAAAAAUAAAAAQAAAAAAAAAVAAAAAQAAAAAAAAAWAAAAAQAAAAAAAAAXAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAYAAIAAgAAAAAAADAYAAMAAQAAAAAAAAAYAAQAAQAAAAAAAAAYAAUAAQAAAAAAAAAYAAYAAQAAAAAAAAAYAAcAAQAAAAAAAAAYAAgAAgAAAAAAAFAYAAkAAgABAAAAAFAYAAoAAgACAAAAAFAYAAsAAgABAAAAAFAYAAwAAgAAAAAAAFAYAA0AAQAAAAAAAFAYAA4AAQAAAAAAAAAXAA4AAQAAAAAAAAAWAA4AAQAAAAAAAAAVAA4AAQAAAAAAAAAUAA4AAQAAAAAAAAATAA4AAQAAAAAAAAASAA4AAQAAAAAAAAARAA4AAQAAAAAAAAAQAA4AAQAAAAAAAAAPAA4AAQAAAAAAAAAOAA4AAQAAAAAAAAANAA4AAQAAAAAAAAAMAA4AAQAAAAAAAAALAA4AAQAAAAAAAAAKAA4AAQAAAAAAAAAJAA4AAQAAAAAAAAAIAA4AAQAAAAAAAAAHAA4AAQAAAAAAAAAGAA4AAQAAAAAAAAAFAA4AAQAAAAAAAAAEAA4AAQAAAAAAAAADAA4AAQAAAAAAAAACAA4AAQAAAAAAAAABAA4AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAEAAIAAgACAAAAAAAGAAIAAgAAAAAAAAAIAAIAAgACAAAAAFAOAAIAAgABAAAAAGAQAAIAAgAAAAAAAFARAAIAAgACAAAAADASAAIAAgAAAAAAAGAWAAIAAgAAAAAAAFAXAAIAAgABAAAAADACAAMAAgACAAAAAFACAAUAAgACAAAAADACAAYAAgACAAAAAAACAAgAAgAAAAAAADACAAoAAgACAAAAADAEAAQAAgACAAAAADAGAAQAAgABAAAAADAHAAQAAgABAAAAADAIAAQAAgABAAAAADAJAAQAAgABAAAAADAKAAQAAQAAAAAAAGAMAAQAAgAAAAAAAFANAAQAAgABAAAAADAPAAQAAgABAAAAADAQAAQAAgABAAAAADASAAQAAQAAAAAAAFATAAQAAgABAAAAADAUAAQAAgABAAAAAGAWAAQAAgAAAAAAAFAFAAYAAgACAAAAAAAHAAYAAgABAAAAAGAKAAYAAgAAAAAAAGAMAAYAAgABAAAAAFAOAAYAAgAAAAAAAGAQAAYAAgACAAAAAGASAAYAAgAAAAAAADATAAYAAgABAAAAADAUAAYAAgABAAAAADADAAYAAgAAAAAAAAABAAYAAgABAAAAAAAEAAgAAgABAAAAADAFAAgAAgACAAAAADAGAAgAAgACAAAAADAJAAgAAQAAAAAAAFAKAAgAAgACAAAAAGAMAAgAAgACAAAAAFANAAgAAgACAAAAAGARAAgAAgAAAAAAADASAAgAAgABAAAAAGAUAAgAAgAAAAAAAFAWAAgAAgABAAAAAGAWAAoAAgAAAAAAAGAVAAoAAQAAAAAAAAAQAAoAAgABAAAAAGAOAAoAAQAAAAAAAGAMAAoAAgAAAAAAAFAKAAoAAgACAAAAAGAIAAoAAgABAAAAAGAGAAoAAgACAAAAAFAEAAoAAgACAAAAAGADAAoAAgAAAAAAADABAAwAAgABAAAAADAEAAwAAgAAAAAAADAFAAwAAgACAAAAADAGAAwAAgACAAAAADAHAAwAAgACAAAAADAIAAwAAgABAAAAAGAMAAwAAgABAAAAAFAOAAwAAgAAAAAAADAPAAwAAgACAAAAADAQAAwAAgAAAAAAAGASAAwAAQAAAAAAAAAWAAwAAgACAAAAAGAEAAkAAgABAAAAAGAGAAkAAgABAAAAAFAIAAEAAgAAAAAAAFAIAAsAAgABAAAAAGAKAAkAAgABAAAAAGAKAAMAAQAAAAAAAGAMAAEAAgABAAAAAGAMAAMAAgABAAAAAFAMAAcAAgACAAAAAFAMAA0AAgAAAAAAAFAOAAkAAQAAAAAAAGAOAAcAAgACAAAAAGAOAAEAAgABAAAAAGAQAAEAAgACAAAAAFAQAAUAAgACAAAAAGAQAAsAAgACAAAAAGAQAA0AAgAAAAAAAGASAAsAAgABAAAAADASAAkAAQAAAAAAAAASAAcAAgABAAAAAGASAAMAAQAAAAAAAFAUAAEAAgABAAAAAFAUAAMAAgAAAAAAAGAUAAcAAgACAAAAAFAUAAkAAgACAAAAAFAUAAsAAgACAAAAAGAUAA0AAgACAAAAADAWAA0AAgACAAAAAGAWAAkAAgABAAAAAGAWAAcAAgABAAAAAGAWAAUAAgABAAAAAFAWAAMAAgABAAAAAFAHAAUAAgABAAAAAGAJAAYAAgACAAAAAFADAAIAAgABAAAAAAAFAAIAAgABAAAAAAATAAsAAgABAAAAADAVAAkAAgAAAAAAADAQAAgAAgACAAAAADACAAIAAgABAAAAAFAEAAEAAgAAAAAAAGAOAAUAAgACAAAAAGAFAAQAAgABAAAAADAKAAcAAgAAAAAAAGADAAEAAgAAAAAAAFAJAAEAAgACAAAAAGALAAEAAQAAAAAAAFABAA0AAgACAAAAAGACAAwAAgABAAAAADAGAA0AAgAAAAAAAFAHAA0AAgABAAAAAGAHAAgAAgABAAAAADABAAgAAgABAAAAADAOAAQAAgACAAAAADAMAAsAAgABAAAAAFAKAAwAAgABAAAAAGAKAA0AAgACAAAAAGANAAcAAgABAAAAADAUAAoAAgABAAAAAFA=")
+tile_set = SubResource("TileSet_85g3d")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(288.49, 437.971)
+limit_left = 25
+limit_top = 15
+limit_right = 1910
+limit_bottom = 1075
+limit_smoothed = true
+script = ExtResource("5_ca42v")
+
+[node name="Floor" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(814.581, 471.853)
+scale = Vector2(0.841327, 0.862458)
+texture = ExtResource("6_rysoc")
+metadata/_edit_lock_ = true
+
+[node name="WallBoundaries" type="StaticBody2D" parent="Floor"]
+visible = false
+
+[node name="TopWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-5.58087, -527.05)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="RightWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(940.566, 13.2149)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(6.26727, 531.7)
+shape = SubResource("RectangleShape2D_choun")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-959.948, 3.53485)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="Player" parent="." instance=ExtResource("7_ssvqc")]
+z_index = 1
+material = ExtResource("3_trtic")
+position = Vector2(288.49, 437.971)
+speed = 150.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../PlayerCamera")
+
+[node name="PlayerCubicle" parent="." instance=ExtResource("8_264po")]
+material = ExtResource("3_trtic")
+position = Vector2(288.49, 416.928)
+
+[node name="ExitTrigger" parent="." instance=ExtResource("9_1kice")]
+z_index = 1
+position = Vector2(1557, 94.3956)
+
+[node name="Cameras" type="Node2D" parent="."]
+
+[node name="SurveillanceCamera" parent="Cameras" instance=ExtResource("10_5newe")]
+z_index = 1
+position = Vector2(1105.37, 618.195)
+
+[node name="SurveillanceCamera2" parent="Cameras" instance=ExtResource("10_5newe")]
+position = Vector2(765.33, 135.395)
+rotation = 0.359538
+
+[node name="SurveillanceCamera3" parent="Cameras" instance=ExtResource("10_5newe")]
+position = Vector2(1382.67, 351.444)
+rotation = 1.5708
+
+[node name="Coworkers" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrayscaleOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_tipki")
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 1952.0
+offset_bottom = 1104.0
+
+[node name="SecurityGuard" parent="." instance=ExtResource("12_bt5mj")]
+position = Vector2(547.303, 384.928)

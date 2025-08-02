@@ -114,3 +114,8 @@ autoplay = "idle"
 frame_progress = 0.962853
 
 [node name="SurveillanceModule" parent="AnimatedSprite2D" instance=ExtResource("3_lv5jy")]
+
+[node name="RaycastSpawn" parent="AnimatedSprite2D/SurveillanceModule" index="3"]
+position = Vector2(0, 16)
+
+[editable path="AnimatedSprite2D/SurveillanceModule"]

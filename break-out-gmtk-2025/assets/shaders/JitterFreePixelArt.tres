@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c1tfgywmul8i2"]
+
+[ext_resource type="Shader" uid="uid://dsl3n2vbcnhp3" path="res://assets/shaders/JitterFree.gdshader" id="1_d3lvn"]
+
+[resource]
+shader = ExtResource("1_d3lvn")

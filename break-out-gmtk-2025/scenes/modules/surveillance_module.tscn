@@ -1,25 +1,150 @@
-[gd_scene load_steps=5 format=3 uid="uid://t0fybjec12dg"]
+[gd_scene load_steps=17 format=3 uid="uid://t0fybjec12dg"]
 
 [ext_resource type="Script" uid="uid://bm6fk1816r5ei" path="res://scripts/surveillance_module.gd" id="1_o2uqg"]
-[ext_resource type="Theme" uid="uid://w8pum2862f6w" path="res://assets/ui_theme.tres" id="2_ydaht"]
-[ext_resource type="FontFile" uid="uid://duf76fr7dcnpt" path="res://assets/Jersey10-Regular.ttf" id="3_iv8oi"]
+[ext_resource type="Texture2D" uid="uid://e478pkin4le1" path="res://assets/SpottedMark.png" id="2_an6yn"]
+[ext_resource type="Texture2D" uid="uid://cy0r58bmqbk5k" path="res://assets/ConeOfVision.png" id="3_o2uqg"]
 
-[sub_resource type="FontVariation" id="FontVariation_gdga8"]
-base_font = ExtResource("3_iv8oi")
+[sub_resource type="Theme" id="Theme_pnswf"]
 
-[node name="SurveillanceModule" type="Area2D"]
+[sub_resource type="Theme" id="Theme_an6yn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2uqg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydaht"]
+bg_color = Color(0.866667, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2uqg"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(512, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydaht"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(640, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv8oi"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(768, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ck8e"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(896, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr2ah"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(0, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mewrp"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(128, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_texei"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(256, 0, 128, 175)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5v5x"]
+atlas = ExtResource("3_o2uqg")
+region = Rect2(384, 0, 128, 175)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_an6yn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2uqg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydaht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv8oi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ck8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv8oi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydaht")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr2ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mewrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_texei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5v5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_texei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mewrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr2ah")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="SurveillanceModule" type="Node2D" groups=["SurveillanceModules"]]
 script = ExtResource("1_o2uqg")
+time_to_spot = 2.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 16, -96, 224, 96, 224)
+[node name="SpottedMark" type="Sprite2D" parent="."]
+position = Vector2(0, -32)
+texture = ExtResource("2_an6yn")
 
 [node name="SpottedTimer" type="Timer" parent="."]
 
-[node name="TimerLabel" type="RichTextLabel" parent="."]
-offset_left = -48.0
-offset_top = -56.0
-offset_right = 128.0
-offset_bottom = 8.0
-theme = ExtResource("2_ydaht")
-theme_override_fonts/normal_font = SubResource("FontVariation_gdga8")
-text = "Time: "
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+custom_minimum_size = Vector2(80, 20)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_pnswf")
+
+[node name="SpottedBar" type="ProgressBar" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = SubResource("Theme_an6yn")
+theme_override_styles/background = SubResource("StyleBoxEmpty_o2uqg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ydaht")
+max_value = 2.0
+step = -0.505
+value = 1.01
+show_percentage = false
+
+[node name="RaycastSpawn" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="ConeOfVision" type="AnimatedSprite2D" parent="RaycastSpawn"]
+position = Vector2(1, 90)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_an6yn")
+animation = &"idle"
+
+[connection signal="timeout" from="SpottedTimer" to="." method="_on_spotted_timer_timeout"]
