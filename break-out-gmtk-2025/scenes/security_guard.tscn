@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b3n4qxmdigls3"]
 
-[ext_resource type="Script" uid="uid://dsq5gelw2v12k" path="res://scenes/security_guard.gd" id="1_4ldpt"]
+[ext_resource type="Script" uid="uid://dsq5gelw2v12k" path="res://scripts/security_guard.gd" id="1_4ldpt"]
 [ext_resource type="Texture2D" uid="uid://bo160ggf6uih0" path="res://prototype/sprites/Security.png" id="1_45doc"]
 [ext_resource type="PackedScene" uid="uid://t0fybjec12dg" path="res://scenes/modules/surveillance_module.tscn" id="2_4ldpt"]
 
@@ -57,7 +57,8 @@ position = Vector2(3.78817, 86.7643)
 rotation = 3.10189
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PatrolPath/CharacterBody2D"]
-position = Vector2(-229.316, -1617.82)
+z_index = 1
+position = Vector2(63.8716, 462.718)
 rotation = -1.70484
 scale = Vector2(778.78, 1.44924)
 shape = SubResource("CapsuleShape2D_4ldpt")

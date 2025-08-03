@@ -1,7 +1,5 @@
 extends Area2D
 
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +10,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
-		SceneController.load_next_level()
+	if body.is_in_group("ActiveCoworkers"):
+		body.queue_free()
+		GameManager.coworkers_saved += 1

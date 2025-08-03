@@ -1,9 +1,104 @@
-[gd_scene format=3 uid="uid://ctiwloacqwx6f"]
+[gd_scene load_steps=7 format=3 uid="uid://ctiwloacqwx6f"]
 
-[node name="Main Menu" type="Control"]
+[ext_resource type="Script" uid="uid://qlp6howqhyjr" path="res://scripts/game_ui/main_menu.gd" id="1_8i5ae"]
+[ext_resource type="FontFile" uid="uid://dffpldr2webny" path="res://assets/PressStart2P-Regular.ttf" id="2_iep04"]
+[ext_resource type="FontFile" uid="uid://c4rh6kuh8blx5" path="res://assets/PixelOperator8-Bold.ttf" id="3_3b8pq"]
+
+[sub_resource type="FontFile" id="FontFile_rvjno"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8i5ae"]
+font = ExtResource("2_iep04")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_i0srl"]
+font = ExtResource("3_3b8pq")
+font_size = 8
+
+[node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -28.2954
+offset_top = -9.43176
+offset_right = -28.2954
+offset_bottom = -9.43176
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8i5ae")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenuArt" type="Sprite2D" parent="CanvasLayer"]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 22.3333
+theme_override_fonts/font = SubResource("FontFile_rvjno")
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.136
+anchor_top = 0.272
+anchor_right = 0.844
+anchor_bottom = 0.639
+offset_left = -0.0400085
+offset_top = -46.92
+offset_right = -0.159973
+offset_bottom = -42.04
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.106
+anchor_right = 0.978
+anchor_bottom = 0.902
+offset_left = 0.222
+offset_top = 0.00799942
+offset_right = -0.0340271
+offset_bottom = -0.0640106
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="EndText" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "The Break"
+label_settings = SubResource("LabelSettings_8i5ae")
+horizontal_alignment = 1
+
+[node name="AntCredits" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "A game by
+Anthony L. Wolf (The Indie Diarist)"
+label_settings = SubResource("LabelSettings_i0srl")
+horizontal_alignment = 1
+
+[node name="StartGameButton" type="Button" parent="CanvasLayer"]
+offset_left = 216.194
+offset_top = 257.246
+offset_right = 426.194
+offset_bottom = 288.246
+theme_override_fonts/font = ExtResource("3_3b8pq")
+text = "Break the loop"
+
+[node name="QuitGame" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(50, 0)
+offset_left = 283.24
+offset_top = 298.709
+offset_right = 349.24
+offset_bottom = 329.709
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_3b8pq")
+text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitGame" to="." method="_on_quit_game_pressed"]

@@ -3,7 +3,6 @@ extends Camera2D
 @onready var main: Node2D = $".."
 @onready var camera: Camera2D = $"."
 
-var game_state
 var start_tween : Tween
 var plan_tween : Tween
 var game_tween : Tween
@@ -17,6 +16,7 @@ func _ready() -> void:
 	
 	start_tween = get_tree().create_tween()
 	
+	GameManager.gsm.change_state(GameManager.GameStates.LOOP)
 	if GameManager.gsm.current_state == GameManager.GameStates.LOOP:
 		start_tween.tween_property(camera, "zoom", Vector2(1.5, 1.5), 5.0) \
 			.set_trans(Tween.TRANS_LINEAR)

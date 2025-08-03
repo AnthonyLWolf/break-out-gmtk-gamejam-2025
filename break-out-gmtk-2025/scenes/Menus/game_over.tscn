@@ -1,4 +1,20 @@
-[gd_scene format=3 uid="uid://d33vkpqongxhy"]
+[gd_scene load_steps=6 format=3 uid="uid://d33vkpqongxhy"]
+
+[ext_resource type="Script" uid="uid://dv27kxnwob1k1" path="res://scripts/game_ui/game_over.gd" id="1_chyk8"]
+[ext_resource type="FontFile" uid="uid://c4rh6kuh8blx5" path="res://assets/PixelOperator8-Bold.ttf" id="1_ocxrp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_chyk8"]
+line_spacing = 8.0
+font = ExtResource("1_ocxrp")
+
+[sub_resource type="LabelSettings" id="LabelSettings_tu6hd"]
+line_spacing = 8.0
+font = ExtResource("1_ocxrp")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_ga5th"]
+font = ExtResource("1_ocxrp")
+font_size = 8
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -7,3 +23,96 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_chyk8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenuArt" type="Sprite2D" parent="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.136
+anchor_top = 0.272
+anchor_right = 0.844
+anchor_bottom = 0.639
+offset_left = -55.04
+offset_top = -63.9953
+offset_right = 55.84
+offset_bottom = -11.1153
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.106
+anchor_right = 0.978
+anchor_bottom = 0.902
+offset_left = 0.222
+offset_top = 0.00799942
+offset_right = -0.0340271
+offset_bottom = -0.0640106
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
+
+[node name="GameOverText1" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "You didn't make it. The corporate loop swallowed you whole."
+label_settings = SubResource("LabelSettings_chyk8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GameOverText2" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "Perhaps there's another way?"
+label_settings = SubResource("LabelSettings_tu6hd")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CoworkersSavedText" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "Coworkers saved:"
+label_settings = SubResource("LabelSettings_chyk8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CoworkersSaved" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "x number"
+label_settings = SubResource("LabelSettings_tu6hd")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RestartButton" type="Button" parent="CanvasLayer"]
+offset_left = 218.0
+offset_top = 237.925
+offset_right = 402.0
+offset_bottom = 268.925
+theme_override_fonts/font = ExtResource("1_ocxrp")
+text = "Loop again"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+offset_left = 260.787
+offset_top = 282.661
+offset_right = 359.787
+offset_bottom = 313.661
+theme_override_fonts/font = ExtResource("1_ocxrp")
+text = "Quit"
+
+[node name="EndText" type="Label" parent="CanvasLayer"]
+offset_left = 203.585
+offset_top = 342.049
+offset_right = 636.585
+offset_bottom = 351.049
+text = "Game Design, Programming, Story, (Some) Art: Anthony L. Wolf"
+label_settings = SubResource("LabelSettings_ga5th")
+horizontal_alignment = 2
+
+[connection signal="pressed" from="CanvasLayer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]

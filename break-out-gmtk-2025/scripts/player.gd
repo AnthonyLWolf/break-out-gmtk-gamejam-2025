@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var player_camera: Camera2D = $"../PlayerCamera"
+@onready var coworkers_saved_label: Label = $CanvasLayer/ScoreLabel
 
 @export var speed = 300.0
 
@@ -18,6 +19,9 @@ enum PlayerStates {
 var psm : StateMachine
 
 func _ready():
+	if GameManager.coworkers_saved == 0:
+		coworkers_saved_label.visible = false
+	
 	psm = StateMachine.new()
 	psm.change_state(PlayerStates.LOOPING)
 	GameManager.gsm.change_state(GameManager.GameStates.LOOP)
@@ -32,7 +36,13 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
 	
-	velocity = position.direction_to(target) * speed
-	#look_at(target)
-	if position.distance_to(target) > 5:
-		move_and_slide()
+	if psm.current_state != PlayerStates.SPOTTED:
+		velocity = position.direction_to(target) * speed
+		#look_at(target)
+		if position.distance_to(target) > 5:
+			move_and_slide()
+
+func _process(delta: float) -> void:
+	if GameManager.coworkers_saved > 0:
+		coworkers_saved_label.visible = true
+		coworkers_saved_label.text = "Saved: " + str(GameManager.coworkers_saved)

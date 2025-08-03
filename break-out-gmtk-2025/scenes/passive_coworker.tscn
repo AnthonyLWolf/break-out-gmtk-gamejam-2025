@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://deu8dhv3ws2q3"]
+
+[ext_resource type="Script" uid="uid://bmkpl70706g6s" path="res://scripts/passive_coworker.gd" id="1_0sag2"]
+[ext_resource type="Texture2D" uid="uid://bdr0w7unr1nib" path="res://prototype/sprites/Coworkers1.png" id="2_0sag2"]
+
+[sub_resource type="Curve2D" id="Curve2D_yja8o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -0.606964, -0.291702, 0, 0, 0, 0, -0.606964, 112.09, 0, 0, 0, 0, 150.261, 115.682, 0, 0, 0, 0, 252.38, 116.708, 0, 0, 0, 0, 249.814, 3.3004, 0, 0, 0, 0, 109.722, -0.291702, 0, 0, 0, 0, -5.22539, -0.804855)
+}
+point_count = 7
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hi2xt"]
+radius = 6.2023
+height = 12.4046
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p20w7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0sag2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="PassiveCoworker" type="Node2D"]
+z_index = 1
+script = ExtResource("1_0sag2")
+path_speed = 10.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_yja8o")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-0.606964, -0.291702)
+rotates = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Path2D/PathFollow2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_hi2xt")
+
+[node name="Body" type="AnimatedSprite2D" parent="Path2D/PathFollow2D/CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_p20w7")
+animation = &"idle"

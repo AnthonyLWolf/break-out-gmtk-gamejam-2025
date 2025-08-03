@@ -12,10 +12,12 @@ enum GameStates {
 
 var gsm : StateMachine
 
+var current_level : String
+var coworkers_saved : int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gsm = StateMachine.new()
-	gsm.change_state(GameStates.LOOP)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,11 +25,11 @@ func _process(delta: float) -> void:
 	if gsm.current_state != GameStates.PAUSED && gsm.current_state != GameStates.MENUS:
 		if Input.is_action_just_pressed("pause"):
 			gsm.change_state(GameStates.PAUSED)
-			#TODO: Add pause menu here
+			get_tree().paused = true
 	elif gsm.current_state == GameStates.PAUSED:
 		if Input.is_action_just_pressed("pause"):
 			gsm.change_state(GameStates.GAMEPLAY)
-			#TODO: Hide pause menu
+			get_tree().paused = false
 
 
 

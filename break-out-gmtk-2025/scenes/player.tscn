@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4lqy1wocwihd"]
+[gd_scene load_steps=6 format=3 uid="uid://b4lqy1wocwihd"]
 
 [ext_resource type="Texture2D" uid="uid://cj0lj0lqaqx83" path="res://prototype/sprites/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b05otnia6yxvg" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="FontFile" uid="uid://c4rh6kuh8blx5" path="res://assets/PixelOperator8-Bold.ttf" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 12.3815
 height = 32.1377
+
+[sub_resource type="LabelSettings" id="LabelSettings_dqkch"]
+font = ExtResource("3_qhqgy")
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_g2els")
@@ -15,3 +21,14 @@ texture = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g2els")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 38.3333
+pivot_offset = Vector2(25.3066, 11.1667)
+text = "Saved: "
+label_settings = SubResource("LabelSettings_dqkch")

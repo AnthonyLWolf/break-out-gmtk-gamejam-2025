@@ -1,4 +1,19 @@
-[gd_scene format=3 uid="uid://dbcvste156los"]
+[gd_scene load_steps=6 format=3 uid="uid://dbcvste156los"]
+
+[ext_resource type="Script" uid="uid://b30q4clmxt7nk" path="res://scripts/game_ui/level_complete.gd" id="1_puuge"]
+[ext_resource type="FontFile" uid="uid://c4rh6kuh8blx5" path="res://assets/PixelOperator8-Bold.ttf" id="2_xlxoi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pdyb8"]
+line_spacing = 8.0
+font = ExtResource("2_xlxoi")
+
+[sub_resource type="LabelSettings" id="LabelSettings_sxlvq"]
+line_spacing = 8.0
+font = ExtResource("2_xlxoi")
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_8p264"]
+font = ExtResource("2_xlxoi")
 
 [node name="LevelComplete" type="Control"]
 layout_mode = 3
@@ -7,3 +22,104 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_puuge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelCompleteArt" type="Sprite2D" parent="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.136
+anchor_top = 0.272
+anchor_right = 0.844
+anchor_bottom = 0.639
+offset_left = -55.04
+offset_top = -63.9953
+offset_right = 55.84
+offset_bottom = -11.1153
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.106
+anchor_right = 0.978
+anchor_bottom = 0.902
+offset_left = 0.222
+offset_top = 0.00799942
+offset_right = -0.0340271
+offset_bottom = -0.0640106
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="LevelCompleteText" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "You've escaped this floor!"
+label_settings = SubResource("LabelSettings_pdyb8")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="AntCredits" type="Label" parent="CanvasLayer/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "But the road is still long..."
+label_settings = SubResource("LabelSettings_sxlvq")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.106
+anchor_right = 0.978
+anchor_bottom = 0.902
+offset_left = 0.335999
+offset_top = 87.39
+offset_right = 0.40802
+offset_bottom = 0.130005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="SavedText" type="Label" parent="CanvasLayer/Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "Coworkers saved:"
+label_settings = SubResource("LabelSettings_8p264")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Coworkers" type="Label" parent="CanvasLayer/Panel/VBoxContainer2"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+text = "x coworkers"
+label_settings = SubResource("LabelSettings_sxlvq")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CanvasLayer"]
+offset_left = 218.0
+offset_top = 237.925
+offset_right = 402.0
+offset_bottom = 268.925
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_xlxoi")
+text = "Keep going"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer"]
+offset_left = 260.787
+offset_top = 282.661
+offset_right = 359.787
+offset_bottom = 313.661
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_xlxoi")
+text = "Give up"
+
+[connection signal="pressed" from="CanvasLayer/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]

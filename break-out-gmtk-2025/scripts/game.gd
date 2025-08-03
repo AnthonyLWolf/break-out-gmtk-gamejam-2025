@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player: CharacterBody2D = $Player
 @onready var grayscale_overlay: ColorRect = $CanvasLayer/GrayscaleOverlay
+@onready var navigation_layer: TileMapLayer = $CubiclesTiles/NavigationLayer
 
 var loop : bool
 
@@ -10,8 +11,9 @@ signal loop_broken
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	loop = true # Sets up loop for later breaking
+	GameManager.gsm.change_state(GameManager.GameStates.LOOP) # Sets up loop for later breaking
 	grayscale_overlay.visible = true
+	navigation_layer.visible = false
 	
 	var surveillance_modules = get_tree().get_nodes_in_group("SurveillanceModules")
 	
@@ -40,5 +42,4 @@ func _process(delta: float) -> void:
 func _game_over():
 	Engine.time_scale = 0.5
 	await get_tree().create_timer(1.0).timeout
-	print("GAME OVER!!!")
-	Engine.time_scale = 1.0
+	SceneController.load_scene("res://scenes/Menus/game_over.tscn")

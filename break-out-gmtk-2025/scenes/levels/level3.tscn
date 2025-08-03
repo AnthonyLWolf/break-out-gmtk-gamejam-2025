@@ -1,20 +1,20 @@
 [gd_scene load_steps=23 format=4 uid="uid://dvbj7kv70ktsx"]
 
-[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="2_kvuet"]
-[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="3_trtic"]
-[ext_resource type="Texture2D" uid="uid://dvmjklihbgts7" path="res://prototype/sprites/Cubicle.png" id="4_ir15t"]
-[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_ca42v"]
-[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_rysoc"]
-[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_ssvqc"]
-[ext_resource type="PackedScene" uid="uid://de3pecwpkw22v" path="res://scenes/cubicle.tscn" id="8_264po"]
-[ext_resource type="PackedScene" uid="uid://7m807y4v7w4p" path="res://scenes/exit_trigger.tscn" id="9_1kice"]
-[ext_resource type="PackedScene" uid="uid://skqv1g1kawty" path="res://scenes/surveillance_camera.tscn" id="10_5newe"]
-[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="11_37s47"]
-[ext_resource type="PackedScene" uid="uid://b3n4qxmdigls3" path="res://scenes/security_guard.tscn" id="12_bt5mj"]
+[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_wb0vq"]
+[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="2_ah4rv"]
+[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="3_522sc"]
+[ext_resource type="Texture2D" uid="uid://dvmjklihbgts7" path="res://prototype/sprites/Cubicle.png" id="4_a82vw"]
+[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_t14x3"]
+[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_ahaer"]
+[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_wt4k6"]
+[ext_resource type="PackedScene" uid="uid://de3pecwpkw22v" path="res://scenes/cubicle.tscn" id="8_wo5bm"]
+[ext_resource type="PackedScene" uid="uid://7m807y4v7w4p" path="res://scenes/exit_trigger.tscn" id="9_edoqj"]
+[ext_resource type="PackedScene" uid="uid://skqv1g1kawty" path="res://scenes/surveillance_camera.tscn" id="10_022ip"]
+[ext_resource type="PackedScene" uid="uid://b3n4qxmdigls3" path="res://scenes/security_guard.tscn" id="11_hl16f"]
+[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="12_v6yyo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
-texture = ExtResource("2_kvuet")
+texture = ExtResource("2_ah4rv")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -35,14 +35,14 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_a8y0u")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tipki"]
-texture = ExtResource("4_ir15t")
+texture = ExtResource("4_a82vw")
 texture_region_size = Vector2i(64, 64)
 0:0/next_alternative_id = 5
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
-texture = ExtResource("2_kvuet")
+texture = ExtResource("2_ah4rv")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
@@ -70,10 +70,11 @@ size = Vector2(1943.07, 25.41)
 size = Vector2(74.9567, 1103.52)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
-shader = ExtResource("11_37s47")
+shader = ExtResource("12_v6yyo")
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_dinhu")
+process_mode = 1
+script = ExtResource("1_wb0vq")
 
 [node name="CubiclesTiles" type="Node2D" parent="."]
 
@@ -82,7 +83,7 @@ tile_map_data = PackedByteArray("AAABAAwAAAADAAAAAAAEAAwAAAADAAAAAAAGAAwAAAADAAA
 tile_set = SubResource("TileSet_jkv2x")
 
 [node name="Cubicles" type="TileMapLayer" parent="CubiclesTiles"]
-material = ExtResource("3_trtic")
+material = ExtResource("3_522sc")
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAIAAAAAQAAAAAAAAAJAAAAAQAAAAAAAAAKAAAAAQAAAAAAAAALAAAAAQAAAAAAAAAMAAAAAQAAAAAAAAANAAAAAQAAAAAAAAAOAAAAAQAAAAAAAAAPAAAAAQAAAAAAAAAQAAAAAQAAAAAAAAARAAAAAQAAAAAAAAASAAAAAQAAAAAAAAATAAAAAQAAAAAAAAAUAAAAAQAAAAAAAAAVAAAAAQAAAAAAAAAWAAAAAQAAAAAAAAAXAAAAAQAAAAAAAAAYAAAAAQAAAAAAAAAYAAIAAgAAAAAAADAYAAMAAQAAAAAAAAAYAAQAAQAAAAAAAAAYAAUAAQAAAAAAAAAYAAYAAQAAAAAAAAAYAAcAAQAAAAAAAAAYAAgAAgAAAAAAAFAYAAkAAgABAAAAAFAYAAoAAgACAAAAAFAYAAsAAgABAAAAAFAYAAwAAgAAAAAAAFAYAA0AAQAAAAAAAFAYAA4AAQAAAAAAAAAXAA4AAQAAAAAAAAAWAA4AAQAAAAAAAAAVAA4AAQAAAAAAAAAUAA4AAQAAAAAAAAATAA4AAQAAAAAAAAASAA4AAQAAAAAAAAARAA4AAQAAAAAAAAAQAA4AAQAAAAAAAAAPAA4AAQAAAAAAAAAOAA4AAQAAAAAAAAANAA4AAQAAAAAAAAAMAA4AAQAAAAAAAAALAA4AAQAAAAAAAAAKAA4AAQAAAAAAAAAJAA4AAQAAAAAAAAAIAA4AAQAAAAAAAAAHAA4AAQAAAAAAAAAGAA4AAQAAAAAAAAAFAA4AAQAAAAAAAAAEAA4AAQAAAAAAAAADAA4AAQAAAAAAAAACAA4AAQAAAAAAAAABAA4AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAAEAAIAAgACAAAAAAAGAAIAAgAAAAAAAAAIAAIAAgACAAAAAFAOAAIAAgABAAAAAGAQAAIAAgAAAAAAAFARAAIAAgACAAAAADASAAIAAgAAAAAAAGAWAAIAAgAAAAAAAFAXAAIAAgABAAAAADACAAMAAgACAAAAAFACAAUAAgACAAAAADACAAYAAgACAAAAAAACAAgAAgAAAAAAADACAAoAAgACAAAAADAEAAQAAgACAAAAADAGAAQAAgABAAAAADAHAAQAAgABAAAAADAIAAQAAgABAAAAADAJAAQAAgABAAAAADAKAAQAAQAAAAAAAGAMAAQAAgAAAAAAAFANAAQAAgABAAAAADAPAAQAAgABAAAAADAQAAQAAgABAAAAADASAAQAAQAAAAAAAFATAAQAAgABAAAAADAUAAQAAgABAAAAAGAWAAQAAgAAAAAAAFAFAAYAAgACAAAAAAAHAAYAAgABAAAAAGAKAAYAAgAAAAAAAGAMAAYAAgABAAAAAFAOAAYAAgAAAAAAAGAQAAYAAgACAAAAAGASAAYAAgAAAAAAADATAAYAAgABAAAAADAUAAYAAgABAAAAADADAAYAAgAAAAAAAAABAAYAAgABAAAAAAAEAAgAAgABAAAAADAFAAgAAgACAAAAADAGAAgAAgACAAAAADAJAAgAAQAAAAAAAFAKAAgAAgACAAAAAGAMAAgAAgACAAAAAFANAAgAAgACAAAAAGARAAgAAgAAAAAAADASAAgAAgABAAAAAGAUAAgAAgAAAAAAAFAWAAgAAgABAAAAAGAWAAoAAgAAAAAAAGAVAAoAAQAAAAAAAAAQAAoAAgABAAAAAGAOAAoAAQAAAAAAAGAMAAoAAgAAAAAAAFAKAAoAAgACAAAAAGAIAAoAAgABAAAAAGAGAAoAAgACAAAAAFAEAAoAAgACAAAAAGADAAoAAgAAAAAAADABAAwAAgABAAAAADAEAAwAAgAAAAAAADAFAAwAAgACAAAAADAGAAwAAgACAAAAADAHAAwAAgACAAAAADAIAAwAAgABAAAAAGAMAAwAAgABAAAAAFAOAAwAAgAAAAAAADAPAAwAAgACAAAAADAQAAwAAgAAAAAAAGASAAwAAQAAAAAAAAAWAAwAAgACAAAAAGAEAAkAAgABAAAAAGAGAAkAAgABAAAAAFAIAAEAAgAAAAAAAFAIAAsAAgABAAAAAGAKAAkAAgABAAAAAGAKAAMAAQAAAAAAAGAMAAEAAgABAAAAAGAMAAMAAgABAAAAAFAMAAcAAgACAAAAAFAMAA0AAgAAAAAAAFAOAAkAAQAAAAAAAGAOAAcAAgACAAAAAGAOAAEAAgABAAAAAGAQAAEAAgACAAAAAFAQAAUAAgACAAAAAGAQAAsAAgACAAAAAGAQAA0AAgAAAAAAAGASAAsAAgABAAAAADASAAkAAQAAAAAAAAASAAcAAgABAAAAAGASAAMAAQAAAAAAAFAUAAEAAgABAAAAAFAUAAMAAgAAAAAAAGAUAAcAAgACAAAAAFAUAAkAAgACAAAAAFAUAAsAAgACAAAAAGAUAA0AAgACAAAAADAWAA0AAgACAAAAAGAWAAkAAgABAAAAAGAWAAcAAgABAAAAAGAWAAUAAgABAAAAAFAWAAMAAgABAAAAAFAHAAUAAgABAAAAAGAJAAYAAgACAAAAAFADAAIAAgABAAAAAAAFAAIAAgABAAAAAAATAAsAAgABAAAAADAVAAkAAgAAAAAAADAQAAgAAgACAAAAADACAAIAAgABAAAAAFAEAAEAAgAAAAAAAGAOAAUAAgACAAAAAGAFAAQAAgABAAAAADAKAAcAAgAAAAAAAGADAAEAAgAAAAAAAFAJAAEAAgACAAAAAGALAAEAAQAAAAAAAFABAA0AAgACAAAAAGACAAwAAgABAAAAADAGAA0AAgAAAAAAAFAHAA0AAgABAAAAAGAHAAgAAgABAAAAADABAAgAAgABAAAAADAOAAQAAgACAAAAADAMAAsAAgABAAAAAFAKAAwAAgABAAAAAGAKAA0AAgACAAAAAGANAAcAAgABAAAAADAUAAoAAgABAAAAAFA=")
 tile_set = SubResource("TileSet_85g3d")
 
@@ -93,13 +94,13 @@ limit_top = 15
 limit_right = 1910
 limit_bottom = 1075
 limit_smoothed = true
-script = ExtResource("5_ca42v")
+script = ExtResource("5_t14x3")
 
 [node name="Floor" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(814.581, 471.853)
 scale = Vector2(0.841327, 0.862458)
-texture = ExtResource("6_rysoc")
+texture = ExtResource("6_ahaer")
 metadata/_edit_lock_ = true
 
 [node name="WallBoundaries" type="StaticBody2D" parent="Floor"]
@@ -121,38 +122,41 @@ shape = SubResource("RectangleShape2D_choun")
 position = Vector2(-959.948, 3.53485)
 shape = SubResource("RectangleShape2D_ya4ey")
 
-[node name="Player" parent="." instance=ExtResource("7_ssvqc")]
+[node name="Player" parent="." instance=ExtResource("7_wt4k6")]
 z_index = 1
-material = ExtResource("3_trtic")
+material = ExtResource("3_522sc")
 position = Vector2(288.49, 437.971)
 speed = 150.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../PlayerCamera")
 
-[node name="PlayerCubicle" parent="." instance=ExtResource("8_264po")]
-material = ExtResource("3_trtic")
+[node name="PlayerCubicle" parent="." instance=ExtResource("8_wo5bm")]
+material = ExtResource("3_522sc")
 position = Vector2(288.49, 416.928)
 
-[node name="ExitTrigger" parent="." instance=ExtResource("9_1kice")]
+[node name="ExitTrigger" parent="." instance=ExtResource("9_edoqj")]
 z_index = 1
 position = Vector2(1557, 94.3956)
 
 [node name="Cameras" type="Node2D" parent="."]
 
-[node name="SurveillanceCamera" parent="Cameras" instance=ExtResource("10_5newe")]
+[node name="SurveillanceCamera" parent="Cameras" instance=ExtResource("10_022ip")]
 z_index = 1
 position = Vector2(1105.37, 618.195)
 
-[node name="SurveillanceCamera2" parent="Cameras" instance=ExtResource("10_5newe")]
+[node name="SurveillanceCamera2" parent="Cameras" instance=ExtResource("10_022ip")]
 position = Vector2(765.33, 135.395)
 rotation = 0.359538
 
-[node name="SurveillanceCamera3" parent="Cameras" instance=ExtResource("10_5newe")]
+[node name="SurveillanceCamera3" parent="Cameras" instance=ExtResource("10_022ip")]
 position = Vector2(1382.67, 351.444)
 rotation = 1.5708
 
 [node name="Coworkers" type="Node2D" parent="."]
+
+[node name="SecurityGuard" parent="." instance=ExtResource("11_hl16f")]
+position = Vector2(547.303, 384.928)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -163,6 +167,3 @@ offset_left = -25.0
 offset_top = -12.0
 offset_right = 1952.0
 offset_bottom = 1104.0
-
-[node name="SecurityGuard" parent="." instance=ExtResource("12_bt5mj")]
-position = Vector2(547.303, 384.928)
