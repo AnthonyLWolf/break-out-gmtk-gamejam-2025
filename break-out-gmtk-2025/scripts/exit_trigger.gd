@@ -14,4 +14,4 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		SceneController.load_next_level()
+		SceneController.load_scene("res://scenes/Menus/level_complete.tscn")

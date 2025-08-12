@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cr1j560o5xvc4"]
+
+[ext_resource type="Script" uid="uid://csiee4r4haad" path="res://scenes/ending_trigger.gd" id="1_nis7o"]
+[ext_resource type="Texture2D" uid="uid://ckvrap02nqyew" path="res://prototype/sprites/Exit Sign.png" id="2_chtl5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puot6"]
+size = Vector2(80, 48)
+
+[node name="EndingTrigger" type="Area2D"]
+script = ExtResource("1_nis7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_puot6")
+
+[node name="ExitSign" type="Sprite2D" parent="."]
+position = Vector2(0.499997, 1.5)
+scale = Vector2(1.23437, 1.23437)
+texture = ExtResource("2_chtl5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,8 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4lqy1wocwihd"]
+[gd_scene load_steps=10 format=3 uid="uid://b4lqy1wocwihd"]
 
 [ext_resource type="Texture2D" uid="uid://cj0lj0lqaqx83" path="res://prototype/sprites/Player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b05otnia6yxvg" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="FontFile" uid="uid://c4rh6kuh8blx5" path="res://assets/PixelOperator8-Bold.ttf" id="3_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 12.3815
@@ -13,11 +35,21 @@ font = ExtResource("3_qhqgy")
 shadow_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
-script = ExtResource("1_g2els")
+[sub_resource type="LabelSettings" id="LabelSettings_qhqgy"]
+font = ExtResource("3_qhqgy")
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3vyb7")
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 2
+script = ExtResource("1_g2els")
+speed = 2000.0
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qlg0r")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.694301
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g2els")
@@ -32,3 +64,24 @@ offset_bottom = 38.3333
 pivot_offset = Vector2(25.3066, 11.1667)
 text = "Saved: "
 label_settings = SubResource("LabelSettings_dqkch")
+
+[node name="SpacebarPrompt" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 298.768
+offset_top = 322.673
+offset_right = 620.768
+offset_bottom = 345.006
+pivot_offset = Vector2(25.3066, 11.1667)
+text = "Spacebar to break loop"
+label_settings = SubResource("LabelSettings_qhqgy")
+horizontal_alignment = 2
+
+[node name="ClickPrompt" type="Label" parent="CanvasLayer"]
+offset_left = 85.0
+offset_top = 323.0
+offset_right = 625.0
+offset_bottom = 345.0
+pivot_offset = Vector2(25.3066, 11.1667)
+text = "Left click to move"
+label_settings = SubResource("LabelSettings_qhqgy")
+horizontal_alignment = 2

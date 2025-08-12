@@ -21,15 +21,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if gsm.current_state != GameStates.PAUSED && gsm.current_state != GameStates.MENUS:
-		if Input.is_action_just_pressed("pause"):
-			gsm.change_state(GameStates.PAUSED)
-			get_tree().paused = true
-	elif gsm.current_state == GameStates.PAUSED:
-		if Input.is_action_just_pressed("pause"):
-			gsm.change_state(GameStates.GAMEPLAY)
-			get_tree().paused = false
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		get_tree().quit()
 
 
 

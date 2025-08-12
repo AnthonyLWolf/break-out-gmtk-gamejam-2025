@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdp51y832ac3r"]
+
+[ext_resource type="Script" uid="uid://dsq5gelw2v12k" path="res://scripts/security_guard.gd" id="1_0xprf"]
+[ext_resource type="Texture2D" uid="uid://bo160ggf6uih0" path="res://prototype/sprites/Security.png" id="2_8n4ub"]
+[ext_resource type="PackedScene" uid="uid://t0fybjec12dg" path="res://scenes/modules/surveillance_module.tscn" id="2_uoier"]
+
+[sub_resource type="Curve2D" id="Curve2D_tcp1x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160)
+}
+point_count = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_winde"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8n4ub")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8n4ub"]
+radius = 5.99188
+height = 18.1011
+
+[node name="SecurityGuard" type="Node2D"]
+script = ExtResource("1_0xprf")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_tcp1x")
+
+[node name="PatrolPath" type="PathFollow2D" parent="Path2D"]
+rotates = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Path2D/PatrolPath"]
+collision_layer = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Path2D/PatrolPath/CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_winde")
+
+[node name="SurveillanceModule" parent="Path2D/PatrolPath/CharacterBody2D/AnimatedSprite2D" instance=ExtResource("2_uoier")]
+position = Vector2(0, -34.7597)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PatrolPath/CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_8n4ub")

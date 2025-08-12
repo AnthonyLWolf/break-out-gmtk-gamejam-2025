@@ -24,6 +24,7 @@ grow_vertical = 2
 script = ExtResource("1_prkpd")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="MainMenuArt" type="Sprite2D" parent="CanvasLayer"]
 

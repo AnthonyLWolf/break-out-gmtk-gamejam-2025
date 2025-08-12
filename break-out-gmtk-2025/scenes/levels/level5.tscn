@@ -1,0 +1,166 @@
+[gd_scene load_steps=24 format=4 uid="uid://df48m8lvg1k8t"]
+
+[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_sd6f7"]
+[ext_resource type="Script" uid="uid://cjqqob4542ofo" path="res://scripts/final_level_signal.gd" id="2_sd6f7"]
+[ext_resource type="Texture2D" uid="uid://b1x6cpq4htpgl" path="res://assets/NavigationMarker.png" id="2_vnf24"]
+[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="3_pm1y0"]
+[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="4_2eb3b"]
+[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_kykwg"]
+[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_iyn63"]
+[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_1ix84"]
+[ext_resource type="PackedScene" uid="uid://de3pecwpkw22v" path="res://scenes/cubicle.tscn" id="8_4x4hb"]
+[ext_resource type="PackedScene" uid="uid://7m807y4v7w4p" path="res://scenes/exit_trigger.tscn" id="9_fmais"]
+[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="11_xrw0o"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lgguw"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jprdt"]
+texture = ExtResource("2_vnf24")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lgguw")
+
+[sub_resource type="TileSet" id="TileSet_1xax6"]
+tile_size = Vector2i(64, 64)
+navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_jprdt")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
+texture = ExtResource("3_pm1y0")
+texture_region_size = Vector2i(64, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.33333, -32, 5.33334, -32, 10.6667, 0, -10.6667, 0)
+4:0/0 = 0
+4:0/0/z_index = 1
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.5, 0.5, 2.5, 0.5, 10.6667, 32, -13, 32)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -16, -11.5, -16, -4, 16, -28, 16)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(12.5, -15.5, 19.5, -15.5, 27.5, 16, 4, 16)
+
+[sub_resource type="TileSet" id="TileSet_jkv2x"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_a8y0u")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
+texture = ExtResource("3_pm1y0")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_85g3d"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_trceg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(1990.46, 18.15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(40.6218, 1137.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
+size = Vector2(1943.07, 25.41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(74.9567, 1103.52)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("11_xrw0o")
+
+[node name="Game" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_sd6f7")
+
+[node name="FinalLevelSignal" type="Node2D" parent="."]
+script = ExtResource("2_sd6f7")
+
+[node name="CubiclesTiles" type="Node2D" parent="."]
+
+[node name="NavigationLayer" type="TileMapLayer" parent="CubiclesTiles"]
+tile_set = SubResource("TileSet_1xax6")
+
+[node name="Coworkers" type="TileMapLayer" parent="CubiclesTiles"]
+tile_set = SubResource("TileSet_jkv2x")
+
+[node name="Cubicles" type="TileMapLayer" parent="CubiclesTiles"]
+material = ExtResource("4_2eb3b")
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAABAAAAAgAAAAAAAAACAAAAAgAAAAAAAAADAAAAAgAAAAAAAAAEAAAAAgAAAAAAAAAFAAAAAgAAAAAAAAAGAAAAAgAAAAAAAAAHAAAAAgAAAAAAAAAIAAAAAgAAAAAAAAAJAAAAAgAAAAAAAAAKAAAAAgAAAAAAAAALAAAAAgAAAAAAAAAMAAAAAgAAAAAAAAANAAAAAgAAAAAAAAAOAAAAAgAAAAAAAAAPAAAAAgAAAAAAAAAQAAAAAgAAAAAAAAARAAAAAgAAAAAAAAASAAAAAgAAAAAAAAATAAAAAgAAAAAAAAAUAAAAAgAAAAAAAAAVAAAAAgAAAAAAAAAWAAAAAgAAAAAAAAAXAAAAAgAAAAAAAAAYAAAAAgAAAAAAAAAYAAIAAgAAAAAAAAAYAAMAAgAAAAAAAAAYAAQAAgAAAAAAAAAYAAUAAgAAAAAAAAAYAAYAAgAAAAAAAAAYAAcAAgAAAAAAAAAYAA0AAgACAAAAAAAYAA4AAgAAAAAAAAAXAA4AAgAAAAAAAAAWAA4AAgAAAAAAAAAVAA4AAgAAAAAAAAAUAA4AAgAAAAAAAAATAA4AAgAAAAAAAAASAA4AAgAAAAAAAAARAA4AAgAAAAAAAAAQAA4AAgAAAAAAAAAPAA4AAgAAAAAAAAAOAA4AAgAAAAAAAAANAA4AAgAAAAAAAAAMAA4AAgAAAAAAAAALAA4AAgAAAAAAAAAKAA4AAgAAAAAAAAAJAA4AAgAAAAAAAAAIAA4AAgAAAAAAAAAHAA4AAgAAAAAAAAAGAA4AAgAAAAAAAAAFAA4AAgAAAAAAAAAEAA4AAgAAAAAAAAADAA4AAgAAAAAAAAACAA4AAgAAAAAAAAABAA4AAgAAAAAAAAAAAA4AAgAAAAAAAAAAAA0AAgAAAAAAAAAAAAwAAgAAAAAAAAAAAAsAAgAAAAAAAAAAAAoAAgAAAAAAAAAAAAkAAgAAAAAAAAAAAAgAAgAAAAAAAAAAAAcAAgAAAAAAAAAAAAYAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAMAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAEAAgAAAAAAAAAYAAwAAgAAAAAAAAAYAAsAAgAAAAAAAAAYAAgAAgAAAAAAAAAYAAoAAgAAAAAAAAAYAAkAAgAAAAAAAAAUAAwAAgABAAAAAAAVAAwAAgAAAAAAAAATAAwAAgACAAAAAAASAAwAAgAAAAAAAAARAAwAAgAAAAAAAAAQAAwAAgACAAAAAAAPAAwAAgACAAAAAAAOAAwAAgAAAAAAAAANAAwAAgABAAAAAAAMAAwAAgACAAAAAAALAAwAAgACAAAAAAAKAAwAAgAAAAAAAAAJAAwAAgAAAAAAAAAIAAwAAgABAAAAAAAHAAwAAgAAAAAAAAAGAAwAAgAAAAAAAAAFAAwAAgACAAAAAAAEAAwAAgABAAAAAAADAAwAAgABAAAAAAACAAwAAgACAAAAAAACAAsAAgAAAAAAAAACAAoAAgACAAAAAAACAAkAAgAAAAAAAAACAAgAAgAAAAAAAAACAAcAAgABAAAAAAACAAYAAgABAAAAAAACAAUAAgABAAAAAAACAAQAAgABAAAAAAACAAMAAgACAAAAAAACAAIAAgACAAAAAAADAAIAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAAIAAgACAAAAAAAGAAIAAgABAAAAAAAHAAIAAgABAAAAAAAIAAIAAgACAAAAAAAJAAIAAgABAAAAAAAKAAIAAgAAAAAAAAALAAIAAgACAAAAAAAMAAIAAgAAAAAAAAANAAIAAgAAAAAAAAAOAAIAAgABAAAAAAAPAAIAAgACAAAAAAAQAAIAAgAAAAAAAAARAAIAAgACAAAAAAASAAIAAgACAAAAAAATAAIAAgACAAAAAAAUAAIAAgAAAAAAAAAWAAwAAgACAAAAAAAWAAsAAgACAAAAAAAWAAoAAgABAAAAAAAWAAkAAgABAAAAAAAWAAgAAgAAAAAAAAAWAAcAAgAAAAAAAAAWAAYAAgAAAAAAAAAWAAUAAgACAAAAAAAWAAQAAgAAAAAAAAAWAAMAAgAAAAAAAAAWAAIAAgACAAAAAAAUAAMAAgAAAAAAAAAUAAQAAgABAAAAAAAUAAUAAgABAAAAAAAUAAYAAgABAAAAAAAUAAcAAgABAAAAAAAUAAgAAgAAAAAAAAAUAAkAAgACAAAAAAAUAAoAAgABAAAAAAATAAoAAgABAAAAAAASAAoAAgABAAAAAAARAAoAAgAAAAAAAAAQAAoAAgAAAAAAAAAPAAoAAgABAAAAAAAOAAoAAgAAAAAAAAANAAoAAgAAAAAAAAAMAAoAAgABAAAAAAALAAoAAgABAAAAAAAKAAoAAgABAAAAAAAJAAoAAgABAAAAAAAIAAoAAgABAAAAAAAHAAoAAgACAAAAAAAGAAoAAgABAAAAAAAFAAoAAgACAAAAAAAEAAoAAgABAAAAAAAEAAkAAgABAAAAAAAEAAgAAgABAAAAAAAEAAcAAgABAAAAAAAEAAYAAgABAAAAAAAEAAUAAgACAAAAAAAEAAQAAgACAAAAAAAFAAQAAgABAAAAAAAGAAQAAgABAAAAAAAHAAQAAgAAAAAAAAAIAAQAAgAAAAAAAAAJAAQAAgABAAAAAAAKAAQAAgABAAAAAAALAAQAAgACAAAAAAAMAAQAAgACAAAAAAANAAQAAgACAAAAAAAOAAQAAgACAAAAAAAPAAQAAgACAAAAAAAQAAQAAgACAAAAAAARAAQAAgABAAAAAAASAAQAAgACAAAAAAASAAUAAgAAAAAAAAASAAYAAgABAAAAAAASAAcAAgACAAAAAAASAAgAAgAAAAAAAAARAAgAAgACAAAAAAAQAAgAAgAAAAAAAAAPAAgAAgAAAAAAAAAOAAgAAgABAAAAAAANAAgAAgABAAAAAAAMAAgAAgAAAAAAAAALAAgAAgACAAAAAAAKAAgAAgABAAAAAAAJAAgAAgAAAAAAAAAIAAgAAgACAAAAAAAHAAgAAgAAAAAAAAAGAAgAAgAAAAAAAAAGAAcAAgAAAAAAAAAGAAYAAgAAAAAAAAAIAAYAAgABAAAAAAAJAAYAAgABAAAAAAAKAAYAAgACAAAAAAALAAYAAgACAAAAAAAMAAYAAgACAAAAAAANAAYAAgACAAAAAAAOAAYAAgACAAAAAAAPAAYAAgABAAAAAAAYAAEAAgACAAAAAAAWAAEAAgABAAAAAAA=")
+tile_set = SubResource("TileSet_85g3d")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(480.59, 440.293)
+limit_left = 25
+limit_top = 15
+limit_right = 1910
+limit_bottom = 1075
+limit_smoothed = true
+script = ExtResource("5_kykwg")
+
+[node name="Floor" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(814.581, 471.853)
+scale = Vector2(0.841327, 0.862458)
+texture = ExtResource("6_iyn63")
+metadata/_edit_lock_ = true
+
+[node name="WallBoundaries" type="StaticBody2D" parent="Floor"]
+visible = false
+
+[node name="TopWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-5.58087, -527.05)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="RightWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(940.566, 13.2149)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(6.26727, 531.7)
+shape = SubResource("RectangleShape2D_choun")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-959.948, 3.53485)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="Player" parent="." instance=ExtResource("7_1ix84")]
+z_index = 1
+material = ExtResource("4_2eb3b")
+position = Vector2(480.59, 440.293)
+speed = 150.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../PlayerCamera")
+
+[node name="PlayerCubicle" parent="." instance=ExtResource("8_4x4hb")]
+material = ExtResource("4_2eb3b")
+position = Vector2(480.59, 419.25)
+
+[node name="ExitTrigger" parent="." instance=ExtResource("9_fmais")]
+z_index = 1
+position = Vector2(1493, 94.396)
+
+[node name="Coworkers" type="Node2D" parent="."]
+
+[node name="Active" type="Node2D" parent="Coworkers"]
+
+[node name="Passive" type="Node2D" parent="Coworkers"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrayscaleOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_tipki")
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 1952.0
+offset_bottom = 1104.0

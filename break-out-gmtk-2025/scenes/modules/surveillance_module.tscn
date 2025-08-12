@@ -99,7 +99,7 @@ animations = [{
 
 [node name="SurveillanceModule" type="Node2D" groups=["SurveillanceModules"]]
 script = ExtResource("1_o2uqg")
-time_to_spot = 2.0
+time_to_spot = 1.0
 
 [node name="SpottedMark" type="Sprite2D" parent="."]
 position = Vector2(0, -32)

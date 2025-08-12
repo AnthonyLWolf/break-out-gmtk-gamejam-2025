@@ -48,6 +48,7 @@ func create_raycasts() -> void:
 		add_child(ray)
 		sightrays.append(ray)
 		ray.enabled = true
+		ray.collision_mask = (1 << 0) | (1 << 1)
 
 func _physics_process(delta: float) -> void:
 	target = null
@@ -77,6 +78,5 @@ func _on_spotted_timer_timeout() -> void:
 	player_spotted = true
 	spotted_mark.visible = true
 	player_caught.emit()
-	print("Player spotted!")
 	spotted_timer.stop()
 	spotted_timer.wait_time = time_to_spot

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var follow_speed : int = 100
 @export var acceleration : int = 50
-@export var friction : int = 1000
+@export var friction : int = 10
 
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var found_icon: AnimatedSprite2D = $Body/FoundIcon
 
 var player = null
+var target = null
 var found : bool = false
 
 enum CoworkerStates {
@@ -24,9 +25,10 @@ var csm = StateMachine.new()
 func _ready() -> void:
 	found_icon.visible = false
 	player = get_tree().get_first_node_in_group("Player")
-	nav_agent.path_desired_distance = 200.0
+	target = get_tree().get_first_node_in_group("CoworkerPortal")
+	nav_agent.path_desired_distance = 100.0
 	nav_agent.target_desired_distance = 50.0
-	nav_agent.path_max_distance = 100.0
+	nav_agent.path_max_distance = 50.0
 	csm.change_state(CoworkerStates.WAITING)
 
 func _physics_process(delta: float) -> void:
@@ -50,7 +52,8 @@ func _physics_process(delta: float) -> void:
 
 func set_movement_target() -> void:
 	await get_tree().physics_frame
-	nav_agent.target_position = player.position - Vector2(20.0, 20.0)
+	nav_agent.target_position = player.position
+	#nav_agent.target_position = target.position # Cute idea to get them to find their own path to the portal, but they slide around a bit too much
 	
 func change_direction(direction : float) -> void:
 	if sign(direction) == -1:

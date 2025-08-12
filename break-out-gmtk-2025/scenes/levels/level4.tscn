@@ -1,0 +1,228 @@
+[gd_scene load_steps=29 format=4 uid="uid://1vwoe44wyrn1"]
+
+[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_t7v7a"]
+[ext_resource type="Texture2D" uid="uid://b1x6cpq4htpgl" path="res://assets/NavigationMarker.png" id="2_xx6b8"]
+[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="3_f62st"]
+[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="4_w24lh"]
+[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_5sfmg"]
+[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_tsmbm"]
+[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_y3vdi"]
+[ext_resource type="PackedScene" uid="uid://de3pecwpkw22v" path="res://scenes/cubicle.tscn" id="8_irrt8"]
+[ext_resource type="PackedScene" uid="uid://cr1j560o5xvc4" path="res://scenes/ending_trigger.tscn" id="9_xx6b8"]
+[ext_resource type="Script" uid="uid://3bul1w1kcyfk" path="res://scenes/levels/saved_coworkers_spawn.gd" id="10_xx6b8"]
+[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="11_qtppw"]
+[ext_resource type="PackedScene" uid="uid://deu8dhv3ws2q3" path="res://scenes/passive_coworker.tscn" id="11_xx6b8"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lgguw"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jprdt"]
+texture = ExtResource("2_xx6b8")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lgguw")
+
+[sub_resource type="TileSet" id="TileSet_1xax6"]
+tile_size = Vector2i(64, 64)
+navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_jprdt")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
+texture = ExtResource("3_f62st")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, 20.8855, 32, 20.8855, 3.38684, -20.8855, 2.82237, -20.8855, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_85g3d"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 2
+sources/2 = SubResource("TileSetAtlasSource_trceg")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
+texture = ExtResource("3_f62st")
+texture_region_size = Vector2i(64, 64)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.33333, -32, 5.33334, -32, 10.6667, 0, -10.6667, 0)
+4:0/0 = 0
+4:0/0/z_index = 1
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.5, 0.5, 2.5, 0.5, 10.6667, 32, -13, 32)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -16, -11.5, -16, -4, 16, -28, 16)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(12.5, -15.5, 19.5, -15.5, 27.5, 16, 4, 16)
+
+[sub_resource type="TileSet" id="TileSet_jkv2x"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 2
+sources/0 = SubResource("TileSetAtlasSource_a8y0u")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(1990.46, 78.3299)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(78.5781, 1137.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
+size = Vector2(1943.07, 87.6528)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(136.524, 1103.52)
+
+[sub_resource type="Curve2D" id="Curve2D_f62st"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 1024, 0, 0, 0, 0, -1152, 1024, 0, 0, 0, 0, -1152, 128, 0, 0, 0, 0, -128, 128, 0, 0, 0, 0, -128, 896, 0, 0, 0, 0, -1024, 896, 0, 0, 0, 0, -1024, 576)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_w24lh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 768, 0, 0, 0, 0, 896, 768, 0, 0, 0, 0, 896, 0, 0, 0, 0, 0, -128, 0, 0, 0, 0, 0, -128, 896, 0, 0, 0, 0, 1024, 896, 0, 0, 0, 0, 1024, 0)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_5sfmg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 1024, 128, 0, 0, 0, 0, 1024, 896, 0, 0, 0, 0, 128, 896, 0, 0, 0, 0, 128, 256)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_xx6b8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -768, 0, 0, 0, 0, 1024, -768, 0, 0, 0, 0, 1024, 0)
+}
+point_count = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("11_qtppw")
+
+[node name="Game" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_t7v7a")
+
+[node name="CubiclesTiles" type="Node2D" parent="."]
+position = Vector2(116, 38.3333)
+
+[node name="NavigationLayer" type="TileMapLayer" parent="CubiclesTiles"]
+tile_map_data = PackedByteArray("AAADAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAHAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAALAAMAAQAAAAAAAAAMAAMAAQAAAAAAAAANAAMAAQAAAAAAAAAOAAMAAQAAAAAAAAAOAAQAAQAAAAAAAAAOAAUAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAcAAQAAAAAAAAAOAAgAAQAAAAAAAAAOAAkAAQAAAAAAAAAOAAoAAQAAAAAAAAAEAAoAAQAAAAAAAAAEAAkAAQAAAAAAAAAEAAgAAQAAAAAAAAAEAAcAAQAAAAAAAAAEAAYAAQAAAAAAAAAEAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAJAAUAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAAMAAUAAQAAAAAAAAAMAAYAAQAAAAAAAAAMAAcAAQAAAAAAAAAMAAgAAQAAAAAAAAAGAAgAAQAAAAAAAAAGAAcAAQAAAAAAAAAOAAsAAQAAAAAAAAANAAsAAQAAAAAAAAAMAAsAAQAAAAAAAAALAAsAAQAAAAAAAAAKAAsAAQAAAAAAAAAJAAsAAQAAAAAAAAAIAAsAAQAAAAAAAAAHAAsAAQAAAAAAAAAGAAsAAQAAAAAAAAAFAAsAAQAAAAAAAAAEAAsAAQAAAAAAAAAMAAkAAQAAAAAAAAALAAkAAQAAAAAAAAAKAAkAAQAAAAAAAAAJAAkAAQAAAAAAAAAIAAkAAQAAAAAAAAAHAAkAAQAAAAAAAAAGAAkAAQAAAAAAAAAHAAcAAQAAAAAAAAAIAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAKAAcAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_1xax6")
+
+[node name="Cubicles" type="TileMapLayer" parent="CubiclesTiles"]
+material = ExtResource("4_w24lh")
+tile_map_data = PackedByteArray("AAADAAIAAgABAAAAADAEAAIAAgABAAAAADAFAAIAAgAAAAAAADAGAAIAAgABAAAAADAHAAIAAgAAAAAAADAIAAIAAgACAAAAADAJAAIAAgABAAAAADAKAAIAAgACAAAAADALAAIAAgACAAAAADAMAAIAAgAAAAAAADANAAIAAgABAAAAADAOAAIAAgACAAAAADAPAAIAAgABAAAAADAPAAMAAgACAAAAAGAPAAQAAgABAAAAAGAPAAUAAgABAAAAAGAPAAYAAgABAAAAAGAPAAcAAgABAAAAAGAPAAgAAgACAAAAAGAPAAkAAgAAAAAAAGAPAAoAAgABAAAAAGAPAAsAAgABAAAAAGAPAAwAAgAAAAAAAGAOAAwAAgACAAAAAAANAAwAAgACAAAAAAAMAAwAAgABAAAAAAALAAwAAgABAAAAAAAKAAwAAgAAAAAAAAAJAAwAAgAAAAAAAAAIAAwAAgAAAAAAAAAHAAwAAgACAAAAAAAGAAwAAgACAAAAAAAFAAwAAgABAAAAAAAEAAwAAgACAAAAAAADAAwAAgAAAAAAAAADAAsAAgACAAAAAFADAAoAAgACAAAAAFADAAkAAgAAAAAAAFADAAgAAgACAAAAAFADAAcAAgABAAAAAFADAAYAAgABAAAAAFADAAUAAgABAAAAAFADAAQAAgAAAAAAAFAEAAQAAgACAAAAADAFAAQAAgACAAAAADAGAAQAAgAAAAAAADAHAAQAAgACAAAAADAIAAQAAgAAAAAAADAJAAQAAgACAAAAADAKAAQAAgABAAAAADALAAQAAgACAAAAADAMAAQAAgAAAAAAADANAAQAAgACAAAAADANAAUAAgABAAAAAGANAAYAAgABAAAAAGANAAcAAgABAAAAAGANAAgAAgACAAAAAGANAAkAAgAAAAAAAGANAAoAAgACAAAAAGAMAAoAAgABAAAAAAALAAoAAgABAAAAAAAKAAoAAgAAAAAAAAAJAAoAAgACAAAAAAAIAAoAAgAAAAAAAAAHAAoAAgAAAAAAAAAGAAoAAgACAAAAAAAFAAoAAgAAAAAAAFAFAAkAAgABAAAAAFAFAAgAAgABAAAAAFAFAAcAAgACAAAAAFAFAAYAAgACAAAAADAGAAYAAgACAAAAADAHAAYAAgAAAAAAADAIAAYAAgACAAAAADAJAAYAAgAAAAAAADAKAAYAAgACAAAAADALAAYAAgABAAAAAGALAAcAAgAAAAAAAGALAAgAAgAAAAAAAAAKAAgAAgACAAAAAAAJAAgAAgACAAAAAAAIAAgAAgABAAAAAAAHAAgAAgACAAAAAAACAAIAAgABAAAAADABAAIAAgABAAAAAFABAAMAAgAAAAAAAFABAAQAAgAAAAAAAFABAAUAAgAAAAAAAFABAAYAAgABAAAAAFABAAcAAgABAAAAAFABAAgAAgABAAAAAFABAAkAAgABAAAAAFABAAoAAgACAAAAAFABAAsAAgABAAAAAFABAAwAAgACAAAAAFABAA0AAgAAAAAAAFABAA4AAgACAAAAAAACAA4AAgAAAAAAAAADAA4AAgACAAAAAAAEAA4AAgACAAAAAAAFAA4AAgABAAAAAAAGAA4AAgAAAAAAAAAHAA4AAgABAAAAAAAIAA4AAgAAAAAAAAAJAA4AAgAAAAAAAAAKAA4AAgACAAAAAAALAA4AAgACAAAAAAAMAA4AAgAAAAAAAAANAA4AAgABAAAAAAAOAA4AAgABAAAAAAAPAA4AAgACAAAAAAAQAA4AAgAAAAAAAAARAA4AAgABAAAAAGARAA0AAgACAAAAAGARAAwAAgABAAAAAGARAAsAAgACAAAAAGARAAoAAgACAAAAAGARAAkAAgACAAAAAGARAAgAAgABAAAAAGARAAcAAgACAAAAAGARAAYAAgACAAAAAGARAAUAAgAAAAAAAGARAAQAAgABAAAAAGARAAMAAgAAAAAAAGARAAIAAgABAAAAAGARAAEAAgAAAAAAAGD//wEAAgABAAAAAGD//wIAAgACAAAAAGD//wMAAgABAAAAAGD//wQAAgABAAAAAGD//wUAAgAAAAAAAGD//wYAAgACAAAAAGD//wcAAgABAAAAAGD//wgAAgAAAAAAAGD//wkAAgABAAAAAGD//woAAgACAAAAAGD//wsAAgAAAAAAAGD//wwAAgAAAAAAAGD//w0AAgABAAAAAGD//w4AAgACAAAAAGATAA4AAgACAAAAAFATAA0AAgACAAAAAFATAAwAAgABAAAAAFATAAsAAgABAAAAAFATAAoAAgAAAAAAAFATAAkAAgAAAAAAAFATAAgAAgACAAAAAFATAAcAAgAAAAAAAFATAAYAAgACAAAAAFATAAUAAgACAAAAAFATAAQAAgAAAAAAAFATAAMAAgACAAAAAFATAAIAAgACAAAAAFATAAEAAgACAAAAAFAVAA4AAgABAAAAAFAVAA0AAgACAAAAAFAVAAwAAgABAAAAAFAVAAsAAgABAAAAAFAVAAoAAgACAAAAAFAVAAkAAgAAAAAAAFAVAAgAAgABAAAAAFAVAAcAAgAAAAAAAFAVAAYAAgABAAAAAFAVAAUAAgACAAAAAFAVAAQAAgACAAAAAFAVAAMAAgAAAAAAAFAVAAIAAgABAAAAAFAVAAEAAgACAAAAAFA=")
+tile_set = SubResource("TileSet_85g3d")
+
+[node name="Coworkers" type="TileMapLayer" parent="CubiclesTiles"]
+tile_map_data = PackedByteArray("AAABAAIAAAAFAAAAAAABAAQAAAAFAAAAAAABAAUAAAAFAAAAAAABAAcAAAAFAAAAAAABAAkAAAAFAAAAAAABAA0AAAAFAAAAAAD//wwAAAAGAAAAAAD//wsAAAAGAAAAAAD//wkAAAAGAAAAAAD//wcAAAAGAAAAAAD//wUAAAAGAAAAAAD//wIAAAAGAAAAAAARAA0AAAAGAAAAAAARAAwAAAAGAAAAAAARAAsAAAAGAAAAAAARAAoAAAAGAAAAAAARAAgAAAAGAAAAAAARAAcAAAAGAAAAAAARAAYAAAAGAAAAAAARAAUAAAAGAAAAAAARAAEAAAAGAAAAAAATAA4AAAAFAAAAAAATAA0AAAAFAAAAAAATAAkAAAAFAAAAAAATAAYAAAAFAAAAAAATAAQAAAAFAAAAAAATAAIAAAAFAAAAAAACAA4AAAAEAAAAAAADAA4AAAAEAAAAAAAFAA4AAAAEAAAAAAAHAA4AAAAEAAAAAAAIAA4AAAAEAAAAAAAJAA4AAAAEAAAAAAAKAA4AAAAEAAAAAAAMAA4AAAAEAAAAAAANAA4AAAAEAAAAAAAFAAwAAAAEAAAAAAAHAAwAAAAEAAAAAAAIAAwAAAAEAAAAAAANAAwAAAAEAAAAAAAPAAsAAAAGAAAAAAAPAAoAAAAGAAAAAAAPAAYAAAAGAAAAAAAPAAUAAAAGAAAAAAAPAAQAAAAGAAAAAAAPAAMAAAAGAAAAAAADAAUAAAAFAAAAAAADAAYAAAAFAAAAAAADAAgAAAAFAAAAAAADAAkAAAAFAAAAAAADAAsAAAAFAAAAAAACAAIAAAADAAAAAAAGAAIAAAADAAAAAAAHAAIAAAADAAAAAAAIAAIAAAADAAAAAAAJAAIAAAADAAAAAAAKAAIAAAADAAAAAAAOAAIAAAADAAAAAAAMAAIAAAADAAAAAAA=")
+tile_set = SubResource("TileSet_jkv2x")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(372.59, 262.333)
+limit_left = 120
+limit_top = 50
+limit_right = 1475
+limit_bottom = 1095
+limit_smoothed = true
+editor_draw_limits = true
+script = ExtResource("5_5sfmg")
+
+[node name="Floor" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(755.323, 567.307)
+scale = Vector2(0.929011, 1.03409)
+texture = ExtResource("6_tsmbm")
+
+[node name="WallBoundaries" type="StaticBody2D" parent="Floor"]
+collision_layer = 3
+
+[node name="TopWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-5.58087, -496.96)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="RightWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(921.588, 13.2149)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(6.2674, 500.579)
+shape = SubResource("RectangleShape2D_choun")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-929.164, 3.53485)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="Player" parent="." instance=ExtResource("7_y3vdi")]
+z_index = 1
+material = ExtResource("4_w24lh")
+position = Vector2(372.59, 262.333)
+speed = 150.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../PlayerCamera")
+
+[node name="PlayerCubicle" parent="." instance=ExtResource("8_irrt8")]
+material = ExtResource("4_w24lh")
+position = Vector2(340.59, 262.333)
+rotation = -1.57079
+
+[node name="EndingTrigger" parent="." instance=ExtResource("9_xx6b8")]
+position = Vector2(768, 512)
+
+[node name="Coworkers" type="Node2D" parent="."]
+position = Vector2(116, 38.3333)
+
+[node name="Active" type="Node2D" parent="Coworkers"]
+
+[node name="SavedCoworkersSpawn" type="Node2D" parent="Coworkers/Active"]
+position = Vector2(320.59, 224)
+script = ExtResource("10_xx6b8")
+
+[node name="Passive" type="Node2D" parent="Coworkers"]
+
+[node name="PassiveCoworker3" parent="Coworkers/Passive" instance=ExtResource("11_xx6b8")]
+position = Vector2(1184, -32)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker3" index="0"]
+curve = SubResource("Curve2D_f62st")
+
+[node name="PassiveCoworker" parent="Coworkers/Passive" instance=ExtResource("11_xx6b8")]
+position = Vector2(160, 96)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker" index="0"]
+curve = SubResource("Curve2D_w24lh")
+
+[node name="PassiveCoworker2" parent="Coworkers/Passive" instance=ExtResource("11_xx6b8")]
+position = Vector2(32, -32)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker2" index="0"]
+curve = SubResource("Curve2D_5sfmg")
+
+[node name="PassiveCoworker4" parent="Coworkers/Passive" instance=ExtResource("11_xx6b8")]
+position = Vector2(32, 864)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker4" index="0"]
+curve = SubResource("Curve2D_xx6b8")
+
+[node name="PathFollow2D" parent="Coworkers/Passive/PassiveCoworker4/Path2D" index="0"]
+position = Vector2(0, -768)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrayscaleOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_tipki")
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 1952.0
+offset_bottom = 1104.0
+
+[editable path="Coworkers/Passive/PassiveCoworker3"]
+[editable path="Coworkers/Passive/PassiveCoworker"]
+[editable path="Coworkers/Passive/PassiveCoworker2"]
+[editable path="Coworkers/Passive/PassiveCoworker4"]

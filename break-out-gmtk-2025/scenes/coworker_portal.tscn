@@ -42,7 +42,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_eafec"]
 radius = 16.7299
 
-[node name="CoworkerPortal" type="Area2D"]
+[node name="CoworkerPortal" type="Area2D" groups=["CoworkerPortal"]]
+collision_layer = 2
 script = ExtResource("1_0wxgs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

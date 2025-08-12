@@ -1,5 +1,6 @@
 extends Control
 
+@onready var coworkers: Label = $CanvasLayer/Panel/VBoxContainer2/Coworkers
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,7 +9,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	coworkers.text = str(GameManager.coworkers_saved)
 
 
 func _on_continue_button_pressed() -> void:

@@ -27,7 +27,6 @@ func _ready() -> void:
 	# Grabs player
 	if is_instance_valid(player):
 		player = get_tree().get_nodes_in_group("Player")[0]
-		print(player.global_position)
 	
 	# Sets up pathing variables
 	guard_sprite_base_scale_y = guard_sprite.scale.y
@@ -77,7 +76,6 @@ func flip():
 
 func _on_surveillance_module_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		print("I'M SPOTTING YOUUUUU")
 		guardsm.change_state(GuardStates.SPOTTING)
 		move_guard()
 

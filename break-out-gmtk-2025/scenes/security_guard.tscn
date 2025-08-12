@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_45doc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0.19101, -0.253128, 0, 0, 0, 0, -32.4644, 241.906)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 231.878)
 }
 point_count = 2
 
@@ -34,8 +34,7 @@ scale = Vector2(0.00128406, 0.690018)
 curve = SubResource("Curve2D_45doc")
 
 [node name="PatrolPath" type="PathFollow2D" parent="Path2D"]
-position = Vector2(0.19101, -0.253128)
-rotation = 1.70484
+rotation = 1.5708
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Path2D/PatrolPath"]
 
