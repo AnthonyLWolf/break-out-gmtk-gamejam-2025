@@ -1,0 +1,284 @@
+[gd_scene load_steps=27 format=4 uid="uid://p4516kna68k7"]
+
+[ext_resource type="Script" uid="uid://cispy4a8qugm4" path="res://scripts/game.gd" id="1_lvjd2"]
+[ext_resource type="Texture2D" uid="uid://b1x6cpq4htpgl" path="res://assets/NavigationMarker.png" id="2_rbirq"]
+[ext_resource type="Texture2D" uid="uid://dkytmynhytein" path="res://assets/Cubicles.png" id="3_lhay1"]
+[ext_resource type="Material" uid="uid://c1tfgywmul8i2" path="res://assets/shaders/JitterFreePixelArt.tres" id="4_fy0jb"]
+[ext_resource type="Script" uid="uid://bwx3ag60gnxh1" path="res://scripts/player_camera.gd" id="5_vbb8y"]
+[ext_resource type="Texture2D" uid="uid://c56nw20lakw6k" path="res://prototype/sprites/floor.png" id="6_d8cqg"]
+[ext_resource type="PackedScene" uid="uid://b4lqy1wocwihd" path="res://scenes/player.tscn" id="7_qjtnr"]
+[ext_resource type="PackedScene" uid="uid://7m807y4v7w4p" path="res://scenes/exit_trigger.tscn" id="9_0e30d"]
+[ext_resource type="PackedScene" uid="uid://dv77bbh3874tw" path="res://scenes/active_coworker.tscn" id="10_cmb26"]
+[ext_resource type="PackedScene" uid="uid://deu8dhv3ws2q3" path="res://scenes/passive_coworker.tscn" id="11_sywuj"]
+[ext_resource type="PackedScene" uid="uid://ghlwhwve1dqu" path="res://scenes/coworker_portal.tscn" id="12_6kch6"]
+[ext_resource type="Shader" uid="uid://c32c70g1y51ji" path="res://assets/shaders/grayscale.gdshader" id="13_wgrxj"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_lgguw"]
+vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ixy47"]
+texture = ExtResource("2_rbirq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_lgguw")
+
+[sub_resource type="TileSet" id="TileSet_ajbs7"]
+tile_size = Vector2i(64, 64)
+navigation_layer_0/layers = 1
+sources/1 = SubResource("TileSetAtlasSource_ixy47")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ajbs7"]
+texture = ExtResource("3_lhay1")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_oa2ja"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_ajbs7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
+size = Vector2(1990.46, 95.077)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85g3d"]
+size = Vector2(76.0699, 1137.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_choun"]
+size = Vector2(1943.07, 95.1186)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(130.446, 1103.52)
+
+[sub_resource type="Curve2D" id="Curve2D_jprdt"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, -128, 0, 0, 0, 0, 0, -128, 0, 0, 0, 0, 0, -320, 0, 0, 0, 0, 0, -448, 0, 0, 0, 0, 0, -512, 0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_nkeig"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128, 32, 0, 0, 0, 0, -128, -32, 0, 0, 0, 0, -128, -160, 0, 0, 0, 0, -128, -224, 0, 0, 0, 0, -192, -288, 0, 0, 0, 0, -256, -288, 0, 0, 0, 0, -256, -256)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_lgguw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128, 32, 0, 0, 0, 0, -288, 32, 0, 0, 0, 0, -512, 32, 0, 0, 0, 0, -672, 32, 0, 0, 0, 0, -768, 32, 0, 0, 0, 0, -832, 32, 0, 0, 0, 0, -896, 32, 0, 0, 0, 0, -960, 32)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_ps2vj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -128, 32, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, -96, 0, 0, 0, 0, -128, -96, 0, 0, 0, 0, -128, 32)
+}
+point_count = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tipki"]
+shader = ExtResource("13_wgrxj")
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_lvjd2")
+
+[node name="CubiclesTiles" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="NavigationLayer" type="TileMapLayer" parent="CubiclesTiles"]
+process_mode = 1
+tile_map_data = PackedByteArray("AAARAAsAAQAAAAAAAAAQAAsAAQAAAAAAAAAPAAsAAQAAAAAAAAAPAAoAAQAAAAAAAAAQAAoAAQAAAAAAAAARAAoAAQAAAAAAAAARAAkAAQAAAAAAAAAQAAkAAQAAAAAAAAAPAAkAAQAAAAAAAAASAAkAAQAAAAAAAAATAAkAAQAAAAAAAAAUAAkAAQAAAAAAAAAVAAkAAQAAAAAAAAAVAAoAAQAAAAAAAAAVAAsAAQAAAAAAAAAUAAsAAQAAAAAAAAAWAAsAAQAAAAAAAAAXAAsAAQAAAAAAAAAXAAoAAQAAAAAAAAAXAAkAAQAAAAAAAAAUAAgAAQAAAAAAAAAUAAcAAQAAAAAAAAATAAcAAQAAAAAAAAASAAcAAQAAAAAAAAARAAcAAQAAAAAAAAAQAAcAAQAAAAAAAAAQAAYAAQAAAAAAAAAVAAcAAQAAAAAAAAAWAAcAAQAAAAAAAAAXAAcAAQAAAAAAAAATAAYAAQAAAAAAAAATAAUAAQAAAAAAAAATAAQAAQAAAAAAAAATAAMAAQAAAAAAAAASAAMAAQAAAAAAAAARAAMAAQAAAAAAAAAQAAMAAQAAAAAAAAAPAAMAAQAAAAAAAAAOAAMAAQAAAAAAAAANAAMAAQAAAAAAAAAMAAMAAQAAAAAAAAALAAMAAQAAAAAAAAAMAAQAAQAAAAAAAAAPAAYAAQAAAAAAAAAPAAUAAQAAAAAAAAAQAAUAAQAAAAAAAAARAAUAAQAAAAAAAAAOAAYAAQAAAAAAAAAOAAcAAQAAAAAAAAAOAAgAAQAAAAAAAAANAAYAAQAAAAAAAAANAAUAAQAAAAAAAAANAAcAAQAAAAAAAAANAAgAAQAAAAAAAAANAAkAAQAAAAAAAAAMAAkAAQAAAAAAAAALAAkAAQAAAAAAAAAKAAkAAQAAAAAAAAAJAAkAAQAAAAAAAAAKAAgAAQAAAAAAAAAKAAcAAQAAAAAAAAAJAAcAAQAAAAAAAAAKAAYAAQAAAAAAAAAKAAUAAQAAAAAAAAALAAUAAQAAAAAAAAALAAYAAQAAAAAAAAALAAcAAQAAAAAAAAALAAgAAQAAAAAAAAAMAAgAAQAAAAAAAAAMAAYAAQAAAAAAAAAUAAQAAQAAAAAAAAAVAAQAAQAAAAAAAAAVAAUAAQAAAAAAAAAWAAUAAQAAAAAAAAAXAAUAAQAAAAAAAAAVAAMAAQAAAAAAAAAWAAMAAQAAAAAAAAAXAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAIAAMAAQAAAAAAAAAHAAMAAQAAAAAAAAAPAAgAAQAAAAAAAAAXAAgAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAIAAUAAQAAAAAAAAAJAAUAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAADAAgAAQAAAAAAAAADAAkAAQAAAAAAAAADAAoAAQAAAAAAAAADAAsAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAQAAQAAAAAAAAAEAAUAAQAAAAAAAAAEAAYAAQAAAAAAAAAEAAcAAQAAAAAAAAAEAAgAAQAAAAAAAAAEAAkAAQAAAAAAAAAEAAoAAQAAAAAAAAAEAAsAAQAAAAAAAAAFAAIAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAUAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAcAAQAAAAAAAAAFAAgAAQAAAAAAAAAFAAkAAQAAAAAAAAAFAAoAAQAAAAAAAAAFAAsAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAMAAQAAAAAAAAAGAAUAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAcAAQAAAAAAAAAGAAgAAQAAAAAAAAAGAAkAAQAAAAAAAAAGAAoAAQAAAAAAAAAGAAsAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAHAAgAAQAAAAAAAAAHAAkAAQAAAAAAAAAHAAoAAQAAAAAAAAAHAAsAAQAAAAAAAAAIAAIAAQAAAAAAAAAIAAQAAQAAAAAAAAAIAAYAAQAAAAAAAAAIAAcAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAkAAQAAAAAAAAAIAAoAAQAAAAAAAAAIAAsAAQAAAAAAAAAJAAIAAQAAAAAAAAAJAAQAAQAAAAAAAAAJAAYAAQAAAAAAAAAJAAgAAQAAAAAAAAAJAAoAAQAAAAAAAAAJAAsAAQAAAAAAAAAKAAIAAQAAAAAAAAAKAAQAAQAAAAAAAAAKAAoAAQAAAAAAAAAKAAsAAQAAAAAAAAALAAIAAQAAAAAAAAALAAQAAQAAAAAAAAALAAoAAQAAAAAAAAALAAsAAQAAAAAAAAAMAAIAAQAAAAAAAAAMAAUAAQAAAAAAAAAMAAcAAQAAAAAAAAAMAAoAAQAAAAAAAAAMAAsAAQAAAAAAAAANAAIAAQAAAAAAAAANAAQAAQAAAAAAAAANAAoAAQAAAAAAAAANAAsAAQAAAAAAAAAOAAIAAQAAAAAAAAAOAAQAAQAAAAAAAAAOAAUAAQAAAAAAAAAOAAkAAQAAAAAAAAAOAAoAAQAAAAAAAAAOAAsAAQAAAAAAAAAPAAIAAQAAAAAAAAAPAAQAAQAAAAAAAAAPAAcAAQAAAAAAAAAQAAIAAQAAAAAAAAAQAAQAAQAAAAAAAAAQAAgAAQAAAAAAAAARAAIAAQAAAAAAAAARAAQAAQAAAAAAAAARAAYAAQAAAAAAAAARAAgAAQAAAAAAAAASAAIAAQAAAAAAAAASAAQAAQAAAAAAAAASAAUAAQAAAAAAAAASAAYAAQAAAAAAAAASAAgAAQAAAAAAAAASAAoAAQAAAAAAAAASAAsAAQAAAAAAAAATAAIAAQAAAAAAAAATAAgAAQAAAAAAAAATAAoAAQAAAAAAAAATAAsAAQAAAAAAAAAUAAIAAQAAAAAAAAAUAAMAAQAAAAAAAAAUAAUAAQAAAAAAAAAUAAYAAQAAAAAAAAAUAAoAAQAAAAAAAAAVAAIAAQAAAAAAAAAVAAYAAQAAAAAAAAAVAAgAAQAAAAAAAAAWAAIAAQAAAAAAAAAWAAQAAQAAAAAAAAAWAAYAAQAAAAAAAAAWAAgAAQAAAAAAAAAWAAkAAQAAAAAAAAAWAAoAAQAAAAAAAAAXAAIAAQAAAAAAAAAXAAQAAQAAAAAAAAAXAAYAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_ajbs7")
+
+[node name="TestCubicles" type="TileMapLayer" parent="CubiclesTiles"]
+tile_map_data = PackedByteArray("AAAIAAUAAAACAAAAAAAJAAUAAAACAAAAAAAKAAUAAAAAAAAAAAALAAUAAAABAAAAAAAHAAcAAAACAAAAAGAHAAgAAAAAAAAAAGAHAAkAAAAAAAAAAGAOAAYAAAAAAAAAAFAOAAcAAAAAAAAAAFAOAAgAAAAAAAAAAFAOAAMAAAACAAAAAAAPAAMAAAABAAAAAAAQAAMAAAACAAAAAAARAAMAAAABAAAAAAAFAAQAAAACAAAAAGAFAAUAAAABAAAAAGAFAAYAAAAAAAAAAGAFAAcAAAACAAAAAGARAAUAAAABAAAAAFARAAYAAAACAAAAAFARAAcAAAACAAAAAFARAAgAAAABAAAAAFA=")
+tile_set = SubResource("TileSet_oa2ja")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+process_mode = 1
+position = Vector2(800.59, 498.358)
+limit_left = 25
+limit_top = 15
+limit_right = 1605
+limit_bottom = 915
+limit_smoothed = true
+editor_draw_limits = true
+script = ExtResource("5_vbb8y")
+
+[node name="Floor" type="Sprite2D" parent="."]
+process_mode = 1
+z_index = -1
+position = Vector2(834.418, 463.012)
+scale = Vector2(0.820664, 0.8278)
+texture = ExtResource("6_d8cqg")
+
+[node name="WallBoundaries" type="StaticBody2D" parent="Floor"]
+collision_layer = 3
+
+[node name="TopWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-5.58087, -488.586)
+shape = SubResource("RectangleShape2D_tipki")
+
+[node name="RightWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(922.842, 13.2149)
+shape = SubResource("RectangleShape2D_85g3d")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(6.26727, 496.846)
+shape = SubResource("RectangleShape2D_choun")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Floor/WallBoundaries"]
+position = Vector2(-932.204, 3.53479)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="Player" parent="." instance=ExtResource("7_qjtnr")]
+process_mode = 1
+z_index = 1
+material = ExtResource("4_fy0jb")
+position = Vector2(800.59, 498.358)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+process_mode = 1
+remote_path = NodePath("../../PlayerCamera")
+
+[node name="ExitTrigger" parent="." instance=ExtResource("9_0e30d")]
+process_mode = 1
+z_index = 1
+position = Vector2(352, 158.396)
+
+[node name="Coworkers" type="Node2D" parent="."]
+process_mode = 1
+
+[node name="Active" type="Node2D" parent="Coworkers"]
+process_mode = 1
+
+[node name="ActiveCoworker9" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+process_mode = 1
+position = Vector2(1068.53, 416)
+
+[node name="ActiveCoworker" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+process_mode = 1
+position = Vector2(961.75, 416)
+
+[node name="ActiveCoworker2" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+process_mode = 1
+position = Vector2(1184, 416)
+
+[node name="ActiveCoworker3" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+process_mode = 1
+position = Vector2(856.25, 416)
+
+[node name="ActiveCoworker4" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+position = Vector2(948.975, 551.908)
+
+[node name="ActiveCoworker5" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+position = Vector2(1102.64, 547.068)
+
+[node name="ActiveCoworker6" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+position = Vector2(1229.69, 525.288)
+
+[node name="ActiveCoworker7" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+position = Vector2(1039.72, 614.828)
+
+[node name="ActiveCoworker8" parent="Coworkers/Active" instance=ExtResource("10_cmb26")]
+position = Vector2(1174.03, 640.238)
+
+[node name="Passive" type="Node2D" parent="Coworkers"]
+process_mode = 1
+visible = false
+
+[node name="PassiveCoworker" parent="Coworkers/Passive" instance=ExtResource("11_sywuj")]
+process_mode = 1
+position = Vector2(224, 736)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker" index="0"]
+process_mode = 1
+curve = SubResource("Curve2D_jprdt")
+
+[node name="PathFollow2D" parent="Coworkers/Passive/PassiveCoworker/Path2D" index="0"]
+process_mode = 1
+position = Vector2(128, -128)
+
+[node name="CharacterBody2D" parent="Coworkers/Passive/PassiveCoworker/Path2D/PathFollow2D" index="0"]
+process_mode = 1
+
+[node name="CollisionShape2D" parent="Coworkers/Passive/PassiveCoworker/Path2D/PathFollow2D/CharacterBody2D" index="0"]
+process_mode = 1
+
+[node name="Body" parent="Coworkers/Passive/PassiveCoworker/Path2D/PathFollow2D/CharacterBody2D" index="1"]
+process_mode = 1
+
+[node name="PassiveCoworker" parent="Coworkers/Passive/PassiveCoworker" instance=ExtResource("11_sywuj")]
+process_mode = 1
+position = Vector2(384, -32)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker/PassiveCoworker" index="0"]
+process_mode = 1
+curve = SubResource("Curve2D_nkeig")
+
+[node name="PathFollow2D" parent="Coworkers/Passive/PassiveCoworker/PassiveCoworker/Path2D" index="0"]
+process_mode = 1
+position = Vector2(-128, 32)
+
+[node name="CharacterBody2D" parent="Coworkers/Passive/PassiveCoworker/PassiveCoworker/Path2D/PathFollow2D" index="0"]
+process_mode = 1
+
+[node name="CollisionShape2D" parent="Coworkers/Passive/PassiveCoworker/PassiveCoworker/Path2D/PathFollow2D/CharacterBody2D" index="0"]
+process_mode = 1
+
+[node name="Body" parent="Coworkers/Passive/PassiveCoworker/PassiveCoworker/Path2D/PathFollow2D/CharacterBody2D" index="1"]
+process_mode = 1
+
+[node name="PassiveCoworker2" parent="Coworkers/Passive" instance=ExtResource("11_sywuj")]
+process_mode = 1
+position = Vector2(1312, 192)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker2" index="0"]
+process_mode = 1
+curve = SubResource("Curve2D_lgguw")
+
+[node name="PathFollow2D" parent="Coworkers/Passive/PassiveCoworker2/Path2D" index="0"]
+process_mode = 1
+position = Vector2(-128, 32)
+
+[node name="CharacterBody2D" parent="Coworkers/Passive/PassiveCoworker2/Path2D/PathFollow2D" index="0"]
+process_mode = 1
+
+[node name="CollisionShape2D" parent="Coworkers/Passive/PassiveCoworker2/Path2D/PathFollow2D/CharacterBody2D" index="0"]
+process_mode = 1
+
+[node name="Body" parent="Coworkers/Passive/PassiveCoworker2/Path2D/PathFollow2D/CharacterBody2D" index="1"]
+process_mode = 1
+
+[node name="PassiveCoworker3" parent="Coworkers/Passive" instance=ExtResource("11_sywuj")]
+position = Vector2(1120, 704)
+
+[node name="Path2D" parent="Coworkers/Passive/PassiveCoworker3" index="0"]
+curve = SubResource("Curve2D_ps2vj")
+
+[node name="PathFollow2D" parent="Coworkers/Passive/PassiveCoworker3/Path2D" index="0"]
+position = Vector2(-128, 32)
+
+[node name="CoworkerPortal" parent="." instance=ExtResource("12_6kch6")]
+process_mode = 1
+position = Vector2(564.566, 498.358)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GrayscaleOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_tipki")
+offset_left = -25.0
+offset_top = -12.0
+offset_right = 1952.0
+offset_bottom = 1104.0
+
+[editable path="Coworkers/Passive/PassiveCoworker"]
+[editable path="Coworkers/Passive/PassiveCoworker/PassiveCoworker"]
+[editable path="Coworkers/Passive/PassiveCoworker2"]
+[editable path="Coworkers/Passive/PassiveCoworker3"]

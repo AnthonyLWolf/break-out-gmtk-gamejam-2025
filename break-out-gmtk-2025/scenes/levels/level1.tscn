@@ -20,7 +20,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jprdt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lgguw"]
 texture = ExtResource("2_jprdt")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -29,9 +29,9 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_1xax6"]
 tile_size = Vector2i(64, 64)
 navigation_layer_0/layers = 1
-sources/1 = SubResource("TileSetAtlasSource_jprdt")
+sources/1 = SubResource("TileSetAtlasSource_lgguw")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8y0u"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jprdt"]
 texture = ExtResource("2_lgguw")
 texture_region_size = Vector2i(64, 64)
 3:0/0 = 0
@@ -47,9 +47,9 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_jkv2x"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 2
-sources/0 = SubResource("TileSetAtlasSource_a8y0u")
+sources/0 = SubResource("TileSetAtlasSource_jprdt")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trceg"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ps2vj"]
 texture = ExtResource("2_lgguw")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -62,7 +62,7 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_85g3d"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 2
-sources/2 = SubResource("TileSetAtlasSource_trceg")
+sources/2 = SubResource("TileSetAtlasSource_ps2vj")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tipki"]
 size = Vector2(1990.46, 95.077)
@@ -167,7 +167,6 @@ process_mode = 1
 z_index = 1
 material = ExtResource("3_jprdt")
 position = Vector2(800.59, 504.293)
-speed = 150.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 process_mode = 1

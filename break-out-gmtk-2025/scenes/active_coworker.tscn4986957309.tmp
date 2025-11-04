@@ -94,9 +94,13 @@ height = 17.0113
 radius = 47.4042
 
 [node name="ActiveCoworker" type="CharacterBody2D" groups=["ActiveCoworkers"]]
+z_index = 1
 collision_mask = 2
 floor_constant_speed = true
 script = ExtResource("1_r2l5q")
+follow_speed = 300
+acceleration = 1000
+friction = 1000
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p20w7")

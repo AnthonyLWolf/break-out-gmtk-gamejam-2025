@@ -13,5 +13,5 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("ActiveCoworkers"):
-		body.queue_free()
+		body.csm.change_state(body.CoworkerStates.SAVED)
 		GameManager.coworkers_saved += 1
